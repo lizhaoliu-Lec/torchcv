@@ -23,6 +23,7 @@ class YOLOv3(object):
     """
       The class for YOLO v3. Include train, val, test & predict.
     """
+
     def __init__(self, configer):
         self.configer = configer
         self.batch_time = AverageMeter()
@@ -134,7 +135,8 @@ class YOLOv3(object):
                 loss = out_dict['loss'].mean()
                 self.val_losses.update(loss.item(), len(DCHelper.tolist(data_dict['meta'])))
 
-                batch_detections = YOLOv3Test.decode(out_dict['dets'], self.configer, DCHelper.tolist(data_dict['meta']))
+                batch_detections = YOLOv3Test.decode(out_dict['dets'], self.configer,
+                                                     DCHelper.tolist(data_dict['meta']))
                 batch_pred_bboxes = self.__get_object_list(batch_detections)
 
                 self.det_running_score.update(batch_pred_bboxes,

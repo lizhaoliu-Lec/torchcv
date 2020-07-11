@@ -9,7 +9,6 @@ import os
 import argparse
 import shutil
 
-
 JOSN_DIR = 'json'
 IMAGE_DIR = 'image'
 CAT_DICT = {'Car': 0, }
@@ -75,7 +74,6 @@ class KittiDetGenerator(object):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', default=None, type=str,
                         dest='save_dir', help='The directory to save the data.')

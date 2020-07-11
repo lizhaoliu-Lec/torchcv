@@ -20,6 +20,7 @@ class ImageClassifier(object):
     """
       The class for the training phase of Image classification.
     """
+
     def __init__(self, configer):
         self.configer = configer
         self.runner_state = dict()
@@ -103,7 +104,7 @@ class ImageClassifier(object):
         self.runner_state['epoch'] += 1
         for i, data_dict in enumerate(self.train_loader):
             Trainer.update(self, warm_list=(0, 1),
-                           warm_lr_list=(self.solver_dict['lr']['base_lr']*self.configer.get('solver.lr.bb_lr_scale'),
+                           warm_lr_list=(self.solver_dict['lr']['base_lr'] * self.configer.get('solver.lr.bb_lr_scale'),
                                          self.solver_dict['lr']['base_lr']),
                            solver_dict=self.solver_dict)
             self.data_time.update(time.time() - start_time)
@@ -133,19 +134,21 @@ class ImageClassifier(object):
                          'Time {batch_time.sum:.3f}s / {2}iters, ({batch_time.avg:.3f})\t'
                          'Data load {data_time.sum:.3f}s / {2}iters, ({data_time.avg:3f})\n'
                          'Learning rate = {4}\tLoss = {3}\n'.format(
-                             self.runner_state['epoch'], self.runner_state['iters'],
-                             self.solver_dict['display_iter'], self.train_losses.info(),
-                             RunnerHelper.get_lr(self.optimizer), batch_time=self.batch_time,
-                             data_time=self.data_time))
+                    self.runner_state['epoch'], self.runner_state['iters'],
+                    self.solver_dict['display_iter'], self.train_losses.info(),
+                    RunnerHelper.get_lr(self.optimizer), batch_time=self.batch_time,
+                    data_time=self.data_time))
 
                 self.batch_time.reset()
                 self.data_time.reset()
                 self.train_losses.reset()
 
-            if self.solver_dict['lr']['metric'] == 'iters' and self.runner_state['iters'] == self.solver_dict['max_iters']:
+            if self.solver_dict['lr']['metric'] == 'iters' and self.runner_state['iters'] == self.solver_dict[
+                'max_iters']:
                 break
 
-            if self.runner_state['iters'] % self.solver_dict['save_iters'] == 0 and self.configer.get('local_rank') == 0:
+            if self.runner_state['iters'] % self.solver_dict['save_iters'] == 0 and self.configer.get(
+                    'local_rank') == 0:
                 RunnerHelper.save_net(self, self.cls_net)
 
             # Check to val the current model.

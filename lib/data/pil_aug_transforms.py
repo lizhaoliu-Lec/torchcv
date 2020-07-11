@@ -25,6 +25,7 @@ class RandomPad(object):
     Returns:
         Outputs: All elements that have been processed.
     """
+
     def __init__(self, up_scale_range=None, ratio=0.5, mean=(104, 117, 123)):
         assert isinstance(up_scale_range, (list, tuple))
         self.up_scale_range = up_scale_range
@@ -94,6 +95,7 @@ class RandomBorder(object):
             Returns::
                 img: Image object.
     """
+
     def __init__(self, pad=None, ratio=0.5, mean=(104, 117, 123), allow_outside_center=True):
         self.pad = pad
         self.ratio = ratio
@@ -287,7 +289,7 @@ class RandomPerm(object):
             return img, labelmap, maskmap, kpts, bboxes, labels, polygons
 
         img_mode = img.mode
-        swap = self.perms[random.randint(0, len(self.perms)-1)]
+        swap = self.perms[random.randint(0, len(self.perms) - 1)]
         img = np.asarray(img)
         img = img[:, :, swap]
         img = Image.fromarray(img.astype(np.uint8), mode=img_mode)
@@ -370,6 +372,7 @@ class RandomHSV(object):
             s range: 0-1
             v range: 0-255
     """
+
     def __init__(self, h_range, s_range, v_range, ratio=0.5):
         assert isinstance(h_range, (list, tuple)) and \
                isinstance(s_range, (list, tuple)) and \
@@ -416,6 +419,7 @@ class RandomResizedCrop(object):
         ratio: range of aspect ratio of the origin aspect ratio cropped
         interpolation: Default: PIL.Image.BILINEAR
     """
+
     def __init__(self, crop_size, scale_range=(0.08, 1.0), aspect_range=(3. / 4., 4. / 3.)):
         self.size = crop_size
         self.scale = scale_range
@@ -585,6 +589,7 @@ class RandomRotate(object):
     Args:
         degree (number): Desired rotate degree.
     """
+
     def __init__(self, max_degree, ratio=0.5, mean=(104, 117, 123)):
         assert isinstance(max_degree, int)
         self.max_degree = max_degree
@@ -697,6 +702,7 @@ class RandomCrop(object):
     Args:
         size (int or tuple): Desired output size of the crop.(w, h)
     """
+
     def __init__(self, crop_size, ratio=0.5, method='focus', grid=None, allow_outside_center=True):
         self.ratio = ratio
         self.method = method
@@ -810,6 +816,7 @@ class RandomFocusCrop(object):
     Args:
         size (int or tuple): Desired output size of the crop.(w, h)
     """
+
     def __init__(self, crop_size, ratio=0.5, center_jitter=None, mean=(104, 117, 123), allow_outside_center=True):
         self.ratio = ratio
         self.center_jitter = center_jitter
@@ -952,6 +959,7 @@ class RandomDetCrop(object):
             boxes (Tensor): the adjusted bounding boxes in pt form
             labels (Tensor): the class labels for each bbox
     """
+
     def __init__(self, ratio=0.5):
         self.ratio = ratio
         self.sample_options = (
@@ -1026,7 +1034,7 @@ class RandomDetCrop(object):
                 left = random.randint(0, width - w)
                 top = random.randint(0, height - h)
                 # convert to integer rect x1,y1,x2,y2
-                rect = np.array([int(left), int(top), int(left+w), int(top+h)])
+                rect = np.array([int(left), int(top), int(left + w), int(top + h)])
                 # calculate IoU (jaccard overlap) b/t the cropped and gt boxes
                 overlap = self.jaccard_numpy(bboxes, rect)
                 # is min and max overlap constraint satisfied? if not try again
@@ -1151,6 +1159,7 @@ class PILAugCompose(object):
         >>>     RandomCrop(),
         >>> ])
     """
+
     def __init__(self, configer, split='train'):
         self.configer = configer
         self.transforms = dict()
@@ -1168,7 +1177,8 @@ class PILAugCompose(object):
 
         for trans in self.trans_dict['trans_seq'] + shuffle_train_trans:
             if 'func' in self.trans_dict[trans]:
-                self.transforms[trans] = PIL_AUGMENTATIONS_DICT[self.trans_dict[trans]['func']](**self.trans_dict[trans]['params'])
+                self.transforms[trans] = PIL_AUGMENTATIONS_DICT[self.trans_dict[trans]['func']](
+                    **self.trans_dict[trans]['params'])
             else:
                 self.transforms[trans] = PIL_AUGMENTATIONS_DICT[trans](**self.trans_dict[trans])
 

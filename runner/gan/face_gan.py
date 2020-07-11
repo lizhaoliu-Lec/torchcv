@@ -21,6 +21,7 @@ class FaceGAN(object):
     """
       The class for Pose Estimation. Include train, val, val & predict.
     """
+
     def __init__(self, configer):
         self.configer = configer
         self.batch_time = AverageMeter()
@@ -83,10 +84,10 @@ class FaceGAN(object):
                          'Time {batch_time.sum:.3f}s / {2}iters, ({batch_time.avg:.3f})\t'
                          'Data load {data_time.sum:.3f}s / {2}iters, ({data_time.avg:3f})\n'
                          'Learning rate = {3}\tLoss = {loss.val:.8f} (ave = {loss.avg:.8f})\n'.format(
-                         self.runner_state['epoch'], self.runner_state['iters'],
-                         self.configer.get('solver', 'display_iter'),
-                         RunnerHelper.get_lr(self.optimizer), batch_time=self.batch_time,
-                         data_time=self.data_time, loss=self.train_losses))
+                    self.runner_state['epoch'], self.runner_state['iters'],
+                    self.configer.get('solver', 'display_iter'),
+                    RunnerHelper.get_lr(self.optimizer), batch_time=self.batch_time,
+                    data_time=self.data_time, loss=self.train_losses))
                 self.batch_time.reset()
                 self.data_time.reset()
                 self.train_losses.reset()

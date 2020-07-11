@@ -42,8 +42,8 @@ class DataLoader(object):
     def get_trainloader(self):
         if self.configer.get('dataset', default=None) in [None, 'default']:
             dataset = DefaultDataset(root_dir=self.configer.get('data', 'data_dir'), dataset='train',
-                                    aug_transform=self.aug_train_transform,
-                                    img_transform=self.img_transform, configer=self.configer)
+                                     aug_transform=self.aug_train_transform,
+                                     img_transform=self.img_transform, configer=self.configer)
         else:
             Log.error('{} dataset is invalid.'.format(self.configer.get('dataset')))
             exit(1)
@@ -68,8 +68,8 @@ class DataLoader(object):
         dataset = 'val' if dataset is None else dataset
         if self.configer.get('dataset', default=None) in [None, 'default']:
             dataset = DefaultDataset(root_dir=self.configer.get('data', 'data_dir'), dataset=dataset,
-                                    aug_transform=self.aug_val_transform,
-                                    img_transform=self.img_transform, configer=self.configer)
+                                     aug_transform=self.aug_val_transform,
+                                     img_transform=self.img_transform, configer=self.configer)
 
         else:
             Log.error('{} dataset is invalid.'.format(self.configer.get('dataset')))

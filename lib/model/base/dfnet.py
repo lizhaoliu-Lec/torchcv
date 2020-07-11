@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#encoding=utf8
+# encoding=utf8
 #########################################################################
 # Author:
 # Created Time: Mon Sep 23 14:22:52 2019
@@ -11,7 +11,6 @@
 import math
 import torch
 import torch.nn as nn
-
 
 __all__ = ['dfnetv1', 'dfnetv2']
 
@@ -86,7 +85,6 @@ class DFNetV1(nn.Module):
     def _make_layer(self, planes, blocks, stride=1):
         downsample = None
         if stride != 1 or self.inplanes != planes * BasicBlock.expansion:
-
             downsample = nn.Sequential(
                 nn.Conv2d(self.inplanes, planes * BasicBlock.expansion,
                           kernel_size=1, stride=stride, bias=False),
@@ -148,7 +146,6 @@ class DFNetV2(nn.Module):
     def _make_layer(self, planes, blocks, stride=1):
         downsample = None
         if stride != 1 or self.inplanes != planes * BasicBlock.expansion:
-
             downsample = nn.Sequential(
                 nn.Conv2d(self.inplanes, planes * BasicBlock.expansion,
                           kernel_size=1, stride=stride, bias=False),
@@ -189,6 +186,7 @@ def dfnetv2():
     """
     model = DFNetV2(num_classes=1000)
     return model
+
 
 if __name__ == "__main__":
     model = DFNetV1(1000)

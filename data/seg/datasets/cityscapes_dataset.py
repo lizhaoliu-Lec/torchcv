@@ -109,7 +109,7 @@ class CityscapesDataset(data.Dataset):
         if dataset == 'train' and self.configer.get('data', 'include_val'):
             image_dir = os.path.join(root_dir, 'leftImg8bit/val')
             label_dir = os.path.join(root_dir, 'gtFine/val')
-    
+
             for image_file in FileHelper.list_dir(image_dir):
                 image_name = '_'.join(image_file.split('_')[:-1])
                 label_file = '{}_gtFine_labelIds.png'.format(image_name)
@@ -118,10 +118,9 @@ class CityscapesDataset(data.Dataset):
                 if not (os.path.exists(label_path) and os.path.exists(img_path)):
                     Log.warn('Image/Label Path: {} not exists.'.format(image_name))
                     continue
-    
+
                 img_list.append(img_path)
                 label_list.append(label_path)
-
 
         return img_list, label_list
 

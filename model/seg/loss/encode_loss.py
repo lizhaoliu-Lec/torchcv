@@ -53,7 +53,7 @@ class EncodeLoss(nn.Module):
         for i in range(batch):
             hist = torch.histc(target[i].cpu().data.float(),
                                bins=num_classes, min=0, max=num_classes - 1)
-            vect = hist>0
+            vect = hist > 0
             tvect[i] = vect
 
         return tvect

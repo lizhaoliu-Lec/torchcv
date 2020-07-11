@@ -31,7 +31,7 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [ 'sphinx.ext.imgmath', 'sphinx.ext.intersphinx' ]
+extensions = ['sphinx.ext.imgmath', 'sphinx.ext.intersphinx']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -79,7 +79,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -104,13 +103,13 @@ html_static_path = ['_static']
 # This is required for the alabaster theme
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 # html_sidebars = {
-    # '**': [
-        # 'about.html',
-        # 'navigation.html',
-        # 'relations.html',  # needs 'show_related': True theme option to display
-        # 'searchbox.html',
-        # 'donate.html',
-    # ]
+# '**': [
+# 'about.html',
+# 'navigation.html',
+# 'relations.html',  # needs 'show_related': True theme option to display
+# 'searchbox.html',
+# 'donate.html',
+# ]
 # }
 
 
@@ -118,7 +117,6 @@ html_static_path = ['_static']
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'PyTorchCVdoc'
-
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -151,7 +149,6 @@ latex_documents = [
      author, 'manual'),
 ]
 
-
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
@@ -160,7 +157,6 @@ man_pages = [
     (master_doc, 'PyTorchCV', 'PyTorchCV Docs',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output -------------------------------------------
 

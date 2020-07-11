@@ -3,7 +3,6 @@
 # Author: Donny You(youansheng@gmail.com)
 """Plot History from Training"""
 
-
 import os
 
 
@@ -14,6 +13,7 @@ class HistoryPlotter(object):
     labels : list of str
         List of names of the labels in the history.
     """
+
     def __init__(self, labels):
         self.l = len(labels)
         self.history = {}
@@ -55,9 +55,9 @@ class HistoryPlotter(object):
             labels = self.labels
         n = len(labels)
 
-        line_lists = [None]*n
+        line_lists = [None] * n
         if colors is None:
-            colors = ['C'+str(i) for i in range(n)]
+            colors = ['C' + str(i) for i in range(n)]
         else:
             assert len(colors) == n
 

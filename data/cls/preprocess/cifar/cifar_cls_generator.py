@@ -11,11 +11,11 @@ import numpy as np
 import sys
 import hashlib
 import argparse
+
 if sys.version_info[0] == 2:
     import cPickle as pickle
 else:
     import pickle
-
 
 IMAGE_DIR = 'image'
 

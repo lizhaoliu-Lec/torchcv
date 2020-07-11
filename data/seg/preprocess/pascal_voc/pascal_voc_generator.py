@@ -9,7 +9,6 @@ import argparse
 import shutil
 from tqdm import tqdm
 
-
 LABEL_DIR = 'label'
 IMAGE_DIR = 'image'
 
@@ -83,7 +82,6 @@ class PascalVOCSegGenerator(object):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', default=None, type=str,
                         dest='save_dir', help='The directory to save the data.')

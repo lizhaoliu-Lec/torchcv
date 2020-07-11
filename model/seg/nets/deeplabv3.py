@@ -128,4 +128,4 @@ if __name__ == '__main__':
     model.eval()
     image = torch.autograd.Variable(torch.randn(1, 3, 512, 512), volatile=True)
     print(type(model.resnet_features))
-    print (model(image).size())
+    print(model(image).size())

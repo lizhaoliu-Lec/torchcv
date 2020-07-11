@@ -22,5 +22,4 @@ class MixupCELoss(nn.Module):
         self.ce_loss = nn.CrossEntropyLoss(weight=weight, ignore_index=ignore_index, reduction=reduction)
 
     def forward(self, input, target_a, target_b, beta):
-
         return beta * self.ce_loss(input, target_a) + (1 - beta) * self.ce_loss(input, target_b)

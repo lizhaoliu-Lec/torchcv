@@ -35,9 +35,11 @@ class ImageTranslatorTest(object):
     def test(self, test_dir, out_dir):
         if self.configer.exists('test', 'mode') and self.configer.get('test', 'mode') == 'nir2vis':
             jsonA_path = os.path.join(test_dir, 'val_label{}A.json'.format(self.configer.get('data', 'tag')))
-            test_loader_A = self.test_loader.get_testloader(json_path=jsonA_path) if os.path.exists(jsonA_path) else None
+            test_loader_A = self.test_loader.get_testloader(json_path=jsonA_path) if os.path.exists(
+                jsonA_path) else None
             jsonB_path = os.path.join(test_dir, 'val_label{}B.json'.format(self.configer.get('data', 'tag')))
-            test_loader_B = self.test_loader.get_testloader(json_path=jsonB_path) if os.path.exists(jsonB_path) else None
+            test_loader_B = self.test_loader.get_testloader(json_path=jsonB_path) if os.path.exists(
+                jsonB_path) else None
         elif self.configer.exists('test', 'mode') and self.configer.get('test', 'mode') == 'pix2pix':
             imgA_dir = os.path.join(test_dir, 'imageA')
             test_loader_A = self.test_loader.get_testloader(test_dir=imgA_dir) if os.path.exists(imgA_dir) else None
@@ -61,7 +63,8 @@ class ImageTranslatorTest(object):
                         img_bgr = self.blob_helper.tensor2bgr(value[i])
                         img_path = meta_list[i]['img_path']
                         Log.info('Image Path: {}'.format(img_path))
-                        ImageHelper.save(img_bgr, os.path.join(out_dir, '{}_{}.jpg'.format(meta_list[i]['filename'], key)))
+                        ImageHelper.save(img_bgr,
+                                         os.path.join(out_dir, '{}_{}.jpg'.format(meta_list[i]['filename'], key)))
 
         if test_loader_B is not None:
             for data_dict in test_loader_B:
@@ -74,4 +77,5 @@ class ImageTranslatorTest(object):
                         img_bgr = self.blob_helper.tensor2bgr(value[i])
                         img_path = meta_list[i]['img_path']
                         Log.info('Image Path: {}'.format(img_path))
-                        ImageHelper.save(img_bgr, os.path.join(out_dir, '{}_{}.jpg'.format(meta_list[i]['filename'], key)))
+                        ImageHelper.save(img_bgr,
+                                         os.path.join(out_dir, '{}_{}.jpg'.format(meta_list[i]['filename'], key)))

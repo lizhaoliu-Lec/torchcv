@@ -80,7 +80,6 @@ class DataLoader(object):
 
         return trainloader
 
-
     def get_valloader(self):
         if self.configer.get('dataset', default=None) in [None, 'default']:
             dataset = DefaultDataset(root_dir=self.configer.get('data', 'data_dir'), dataset='val',
@@ -110,7 +109,6 @@ class DataLoader(object):
         )
 
         return valloader
-
 
 
 if __name__ == "__main__":

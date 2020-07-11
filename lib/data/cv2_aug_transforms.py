@@ -27,7 +27,7 @@ class RandomBlur(object):
         if random.random() > self.ratio:
             return img, labelmap, maskmap, kpts, bboxes, labels, polygons
 
-        method = random.randint(0, len(self.blur_list)-1)
+        method = random.randint(0, len(self.blur_list) - 1)
         img = self.blur_list[method].augment_image(img)
         return img, labelmap, maskmap, kpts, bboxes, labels, polygons
 
@@ -90,6 +90,7 @@ class RandomPad(object):
     Returns:
         Outputs: All elements that have been processed.
     """
+
     def __init__(self, up_scale_range=None, ratio=0.5, mean=(104, 117, 123)):
         assert isinstance(up_scale_range, (list, tuple))
         self.up_scale_range = up_scale_range
@@ -121,10 +122,10 @@ class RandomPad(object):
         left_pad = random.randint(0, pad_width)  # pad_left
         up_pad = random.randint(0, pad_height)  # pad_up
         if not isinstance(img, list):
-            img = cv2.copyMakeBorder(img, up_pad, pad_height-up_pad, left_pad, pad_width-left_pad,
+            img = cv2.copyMakeBorder(img, up_pad, pad_height - up_pad, left_pad, pad_width - left_pad,
                                      cv2.BORDER_CONSTANT, value=self.mean)
         else:
-            img = [cv2.copyMakeBorder(item, up_pad, pad_height-up_pad, left_pad, pad_width-left_pad,
+            img = [cv2.copyMakeBorder(item, up_pad, pad_height - up_pad, left_pad, pad_width - left_pad,
                                       cv2.BORDER_CONSTANT, value=self.mean) for item in img]
 
         if labelmap is not None:
@@ -161,6 +162,7 @@ class RandomBorder(object):
             Returns::
                 img: Image object.
     """
+
     def __init__(self, pad=None, ratio=0.5, mean=(104, 117, 123), allow_outside_center=True):
         self.pad = pad
         self.ratio = ratio
@@ -227,18 +229,18 @@ class RandomBorder(object):
                                      max(width, target_size[0]) + abs(offset_left), channels), dtype=img.dtype)
             expand_image[:, :, :] = self.mean
             expand_image[abs(min(offset_up, 0)):abs(min(offset_up, 0)) + height,
-                         abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = img
+            abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = img
             img = expand_image[max(offset_up, 0):max(offset_up, 0) + target_size[1],
-                               max(offset_left, 0):max(offset_left, 0) + target_size[0]]
+                  max(offset_left, 0):max(offset_left, 0) + target_size[0]]
         else:
             for i in range(len(img)):
                 expand_image = np.zeros((max(height, target_size[1]) + abs(offset_up),
                                          max(width, target_size[0]) + abs(offset_left), channels), dtype=img[i].dtype)
                 expand_image[:, :, :] = self.mean
                 expand_image[abs(min(offset_up, 0)):abs(min(offset_up, 0)) + height,
-                             abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = img[i]
+                abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = img[i]
                 img[i] = expand_image[max(offset_up, 0):max(offset_up, 0) + target_size[1],
-                                      max(offset_left, 0):max(offset_left, 0) + target_size[0]]
+                         max(offset_left, 0):max(offset_left, 0) + target_size[0]]
 
         if maskmap is not None:
             expand_maskmap = np.zeros((max(height, target_size[1]) + abs(offset_up),
@@ -436,6 +438,7 @@ class RandomResizedCrop(object):
         ratio: range of aspect ratio of the origin aspect ratio cropped
         interpolation: Default: PIL.Image.BILINEAR
     """
+
     def __init__(self, crop_size, scale_range=(0.08, 1.0), aspect_range=(3. / 4., 4. / 3.)):
         self.size = tuple(crop_size)
         self.scale = scale_range
@@ -487,7 +490,7 @@ class RandomResizedCrop(object):
         """
         assert labelmap is None and maskmap is None and kpts is None and bboxes is None and labels is None
         i, j, h, w = self.get_params(img, self.scale, self.ratio)
-        img = img[i:i+h, j:j+w]
+        img = img[i:i + h, j:j + w]
         img = cv2.resize(img, self.size, interpolation=cv2.INTER_LINEAR)
         return img, labelmap, maskmap, kpts, bboxes, labels, polygons
 
@@ -499,6 +502,7 @@ class RandomResize(object):
         scale_min: the min scale to resize.
         scale_max: the max scale to resize.
     """
+
     def __init__(self, scale_range=(0.75, 1.25), aspect_range=(0.9, 1.1), target_size=None,
                  resize_bound=None, method='random', ratio=0.5):
         self.scale_range = scale_range
@@ -604,6 +608,7 @@ class RandomRotate(object):
     Args:
         degree (number): Desired rotate degree.
     """
+
     def __init__(self, max_degree, ratio=0.5, mean=(104, 117, 123)):
         assert isinstance(max_degree, int)
         self.max_degree = max_degree
@@ -784,7 +789,6 @@ class RandomCrop(object):
                 for object_id in range(len(polygons)):
                     if mask[object_id] == 1:
                         for polygon_id in range(len(polygons[object_id])):
-
                             polygons[object_id][polygon_id][0::2] -= offset_left
                             polygons[object_id][polygon_id][1::2] -= offset_up
                             polygons[object_id][polygon_id][0::2] = np.clip(polygons[object_id][polygon_id][0::2],
@@ -816,6 +820,7 @@ class RandomFocusCrop(object):
     Args:
         size (int or tuple): Desired output size of the crop.(w, h)
     """
+
     def __init__(self, crop_size, ratio=0.5, center_jitter=None, mean=(104, 117, 123), allow_outside_center=True):
         self.ratio = ratio
         self.center_jitter = center_jitter
@@ -929,26 +934,26 @@ class RandomFocusCrop(object):
                                  max(width, self.size[0]) + abs(offset_left), channels), dtype=img.dtype)
         expand_image[:, :, :] = self.mean
         expand_image[abs(min(offset_up, 0)):abs(min(offset_up, 0)) + height,
-                     abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = img
+        abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = img
         img = expand_image[max(offset_up, 0):max(offset_up, 0) + self.size[1],
-                           max(offset_left, 0):max(offset_left, 0) + self.size[0]]
+              max(offset_left, 0):max(offset_left, 0) + self.size[0]]
         if maskmap is not None:
             expand_maskmap = np.zeros((max(height, self.size[1]) + abs(offset_up),
                                        max(width, self.size[0]) + abs(offset_left)), dtype=maskmap.dtype)
             expand_maskmap[:, :] = 1
             expand_maskmap[abs(min(offset_up, 0)):abs(min(offset_up, 0)) + height,
-                           abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = maskmap
+            abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = maskmap
             maskmap = expand_maskmap[max(offset_up, 0):max(offset_up, 0) + self.size[1],
-                                     max(offset_left, 0):max(offset_left, 0) + self.size[0]]
+                      max(offset_left, 0):max(offset_left, 0) + self.size[0]]
 
         if labelmap is not None:
             expand_labelmap = np.zeros((max(height, self.size[1]) + abs(offset_up),
                                         max(width, self.size[0]) + abs(offset_left)), dtype=labelmap.dtype)
             expand_labelmap[:, :] = 255
             expand_labelmap[abs(min(offset_up, 0)):abs(min(offset_up, 0)) + height,
-                            abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = labelmap
+            abs(min(offset_left, 0)):abs(min(offset_left, 0)) + width] = labelmap
             labelmap = expand_labelmap[max(offset_up, 0):max(offset_up, 0) + self.size[1],
-                                       max(offset_left, 0):max(offset_left, 0) + self.size[0]]
+                       max(offset_left, 0):max(offset_left, 0) + self.size[0]]
 
         return img, labelmap, maskmap, kpts, bboxes, labels, polygons
 
@@ -966,6 +971,7 @@ class RandomDetCrop(object):
             boxes (Tensor): the adjusted bounding boxes in pt form
             labels (Tensor): the class labels for each bbox
     """
+
     def __init__(self, ratio=0.5):
         self.ratio = ratio
         self.sample_options = (
@@ -1080,6 +1086,7 @@ class Resize(object):
         scale_min: the min scale to resize.
         scale_max: the max scale to resize.
     """
+
     def __init__(self, target_size=None, min_side_length=None, max_side_length=None):
         self.target_size = target_size
         self.min_side_length = min_side_length
@@ -1169,6 +1176,7 @@ class CV2AugCompose(object):
         >>>     RandomCrop(),
         >>> ])
     """
+
     def __init__(self, configer, split='train'):
         self.configer = configer
         self.transforms = dict()
@@ -1186,7 +1194,8 @@ class CV2AugCompose(object):
 
         for trans in self.trans_dict['trans_seq'] + shuffle_train_trans:
             if 'func' in self.trans_dict[trans]:
-                self.transforms[trans] = CV2_AUGMENTATIONS_DICT[self.trans_dict[trans]['func']](**self.trans_dict[trans]['params'])
+                self.transforms[trans] = CV2_AUGMENTATIONS_DICT[self.trans_dict[trans]['func']](
+                    **self.trans_dict[trans]['params'])
             else:
                 self.transforms[trans] = CV2_AUGMENTATIONS_DICT[trans](**self.trans_dict[trans])
 

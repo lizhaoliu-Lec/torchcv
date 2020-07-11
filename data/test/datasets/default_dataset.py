@@ -18,7 +18,7 @@ class DefaultDataset(data.Dataset):
     def __init__(self, test_dir=None, aug_transform=None, img_transform=None, configer=None):
         super(DefaultDataset, self).__init__()
         self.configer = configer
-        self.aug_transform=aug_transform
+        self.aug_transform = aug_transform
         self.img_transform = img_transform
         self.item_list = [(os.path.join(test_dir, filename), '.'.join(filename.split('.')[:-1]))
                           for filename in FileHelper.list_dir(test_dir) if ImageHelper.is_img(filename)]

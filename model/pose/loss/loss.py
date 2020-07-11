@@ -8,7 +8,6 @@ import torch.nn as nn
 
 from model.pose.loss.mse_loss import MseLoss
 
-
 BASE_LOSS_DICT = dict(
     mse_loss=0,
 )
@@ -18,7 +17,7 @@ class Loss(nn.Module):
     def __init__(self, configer):
         super(Loss, self).__init__()
         self.configer = configer
-        self.func_list = [MseLoss(self.configer),]
+        self.func_list = [MseLoss(self.configer), ]
 
     def forward(self, out_list):
         loss_dict = out_list[-1]

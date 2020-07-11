@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 from .utils import load_state_dict_from_url
 
-
 __all__ = [
     'ShuffleNetV2', 'shufflenet_v2_x0_5', 'shufflenet_v2_x1_0',
     'shufflenet_v2_x1_5', 'shufflenet_v2_x2_0'

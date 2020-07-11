@@ -24,6 +24,7 @@ class FasterRCNN(object):
     """
       The class for Single Shot Detector. Include train, val, test & predict.
     """
+
     def __init__(self, configer):
         self.configer = configer
         self.batch_time = AverageMeter()
@@ -49,7 +50,7 @@ class FasterRCNN(object):
         self.det_net = self.det_model_manager.object_detector()
         self.det_net = RunnerHelper.load_net(self, self.det_net)
 
-        self.optimizer, self.scheduler = Trainer.init( self._get_parameters(), self.configer.get('solver'))
+        self.optimizer, self.scheduler = Trainer.init(self._get_parameters(), self.configer.get('solver'))
 
         self.train_loader = self.det_data_loader.get_trainloader()
         self.val_loader = self.det_data_loader.get_valloader()

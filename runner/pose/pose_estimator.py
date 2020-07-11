@@ -21,6 +21,7 @@ class PoseEstimator(object):
     """
       The class for Pose Estimation. Include train, val, test & predict.
     """
+
     def __init__(self, configer):
         self.configer = configer
         self.batch_time = AverageMeter()
@@ -62,7 +63,7 @@ class PoseEstimator(object):
                 lr_1.append(value)
 
         params = [{'params': lr_1, 'lr': self.configer.get('solver', 'lr')['base_lr'], 'weight_decay': 0.0},
-                  {'params': lr_2, 'lr': self.configer.get('solver', 'lr')['base_lr'], 'weight_decay': 0.0},]
+                  {'params': lr_2, 'lr': self.configer.get('solver', 'lr')['base_lr'], 'weight_decay': 0.0}, ]
 
         return params
 

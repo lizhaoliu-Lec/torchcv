@@ -15,7 +15,6 @@ from lib.data.transforms import DeNormalize
 from lib.tools.helper.image_helper import ImageHelper
 from lib.tools.util.logger import Logger as log
 
-
 DET_DIR = 'vis/results/det'
 
 
@@ -71,9 +70,9 @@ class DetVisualizer(object):
 
                 class_name = self.configer.get('details', 'name_seq')[label - 1]
                 cv2.rectangle(ori_img,
-                                (int(rois[j][0]), int(rois[j][1])),
-                                (int(rois[j][2]), int(rois[j][3])),
-                                color=self.configer.get('details', 'color_list')[(label - 1) % color_num], thickness=3)
+                              (int(rois[j][0]), int(rois[j][1])),
+                              (int(rois[j][2]), int(rois[j][3])),
+                              color=self.configer.get('details', 'color_list')[(label - 1) % color_num], thickness=3)
                 cv2.putText(ori_img, class_name,
                             (int(rois[j][0]) + 5, int(rois[j][3]) - 5),
                             cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5,

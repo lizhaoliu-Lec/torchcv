@@ -10,11 +10,10 @@ import argparse
 import shutil
 from bs4 import BeautifulSoup
 
-
 JOSN_DIR = 'json'
 IMAGE_DIR = 'image'
 CAT_DICT = {
-    'aeroplane': 0, 'bicycle':1,'bird':2,'boat':3,'bottle':4,
+    'aeroplane': 0, 'bicycle': 1, 'bird': 2, 'boat': 3, 'bottle': 4,
     'bus': 5, 'car': 6, 'cat': 7, 'chair': 8, 'cow': 9, 'diningtable': 10,
     'dog': 11, 'horse': 12, 'motorbike': 13, 'person': 14, 'pottedplant': 15,
     'sheep': 16, 'sofa': 17, 'train': 18, 'tvmonitor': 19
@@ -122,8 +121,8 @@ class VocDetGenerator(object):
                 shutil.copy(os.path.join(self.args.root_dir, 'VOC2007/JPEGImages', '{}.jpg'.format(img_name)),
                             os.path.join(self.val_image_dir, '{}.jpg'.format(img_name)))
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', default=None, type=str,
                         dest='save_dir', help='The directory to save the data.')

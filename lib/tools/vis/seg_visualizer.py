@@ -11,7 +11,6 @@ import numpy as np
 from lib.data.transforms import DeNormalize
 from lib.tools.util.logger import Logger as Log
 
-
 SEG_DIR = 'vis/results/seg'
 
 
@@ -99,7 +98,7 @@ class SegVisualizer(object):
 
             image_result = cv2.cvtColor(result, cv2.COLOR_BGR2RGB)
             if ori_img_in is not None:
-                image_result  = cv2.addWeighted(ori_img[i], 0.6, image_result, 0.4, 0)
+                image_result = cv2.addWeighted(ori_img[i], 0.6, image_result, 0.4, 0)
 
             cv2.imwrite(os.path.join(base_dir, '{}_{}.jpg'.format(name, img_id)), image_result)
 

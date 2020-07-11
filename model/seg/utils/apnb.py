@@ -42,7 +42,8 @@ class _SelfAttentionBlock(nn.Module):
         position-aware context features.(w/o concate or add with the input)
     '''
 
-    def __init__(self, in_channels, key_channels, value_channels, out_channels=None, scale=1, norm_type=None,psp_size=(1,3,6,8)):
+    def __init__(self, in_channels, key_channels, value_channels, out_channels=None, scale=1, norm_type=None,
+                 psp_size=(1, 3, 6, 8)):
         super(_SelfAttentionBlock, self).__init__()
         self.scale = scale
         self.in_channels = in_channels
@@ -92,7 +93,8 @@ class _SelfAttentionBlock(nn.Module):
 
 
 class SelfAttentionBlock2D(_SelfAttentionBlock):
-    def __init__(self, in_channels, key_channels, value_channels, out_channels=None, scale=1, norm_type=None,psp_size=(1,3,6,8)):
+    def __init__(self, in_channels, key_channels, value_channels, out_channels=None, scale=1, norm_type=None,
+                 psp_size=(1, 3, 6, 8)):
         super(SelfAttentionBlock2D, self).__init__(in_channels,
                                                    key_channels,
                                                    value_channels,
@@ -113,11 +115,12 @@ class APNB(nn.Module):
         features fused with Object context information.
     """
 
-    def __init__(self, in_channels, out_channels, key_channels, value_channels, dropout, sizes=([1]), norm_type=None,psp_size=(1,3,6,8)):
+    def __init__(self, in_channels, out_channels, key_channels, value_channels, dropout, sizes=([1]), norm_type=None,
+                 psp_size=(1, 3, 6, 8)):
         super(APNB, self).__init__()
         self.stages = []
         self.norm_type = norm_type
-        self.psp_size=psp_size
+        self.psp_size = psp_size
         self.stages = nn.ModuleList(
             [self._make_stage(in_channels, out_channels, key_channels, value_channels, size) for size in sizes])
         self.conv_bn_dropout = nn.Sequential(
@@ -142,4 +145,3 @@ class APNB(nn.Module):
             context += priors[i]
         output = self.conv_bn_dropout(torch.cat([context, feats], 1))
         return output
-

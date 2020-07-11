@@ -58,7 +58,7 @@ class CocoEvaluator(object):
         gt_coco = COCO(gt_file)
         res_coco = gt_coco.loadRes(pred_file)
         coco_eval = COCOeval(gt_coco, res_coco, 'bbox')
-        coco_eval.params.imgIds = img_ids # res_coco.getImgIds()
+        coco_eval.params.imgIds = img_ids  # res_coco.getImgIds()
         coco_eval.evaluate()
         coco_eval.accumulate()
         coco_eval.summarize()

@@ -6,6 +6,7 @@
 
 class AverageMeter(object):
     """ Computes ans stores the average and current value"""
+
     def __init__(self):
         self.reset()
 
@@ -24,14 +25,15 @@ class AverageMeter(object):
 
 class DictAverageMeter(object):
     """ Computes ans stores the average and current value"""
+
     def __init__(self):
         self.key_list = None
 
     def reset(self):
-        self.val = {key:0. for key in self.key_list}
-        self.avg = {key:0. for key in self.key_list}
-        self.sum = {key:0. for key in self.key_list}
-        self.count = {key:0 for key in self.key_list}
+        self.val = {key: 0. for key in self.key_list}
+        self.avg = {key: 0. for key in self.key_list}
+        self.sum = {key: 0. for key in self.key_list}
+        self.count = {key: 0 for key in self.key_list}
 
     def update(self, val_dict, n_dict=None):
         if self.key_list is None:
@@ -58,6 +60,7 @@ class DictAverageMeter(object):
 
 class ListAverageMeter(object):
     """ Computes ans stores the average and current value"""
+
     def __init__(self):
         self.len = None
 

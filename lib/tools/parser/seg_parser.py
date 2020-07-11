@@ -72,6 +72,7 @@ class SegParser(object):
         else:
             return color_img_bgr
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--config_file', default=None, type=str,

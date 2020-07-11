@@ -2,12 +2,10 @@ import torch
 import torch.nn as nn
 from .utils import load_state_dict_from_url
 
-
 __all__ = ['DeepbaseResNet', 'deepbase_resnet18', 'deepbase_resnet34', 'deepbase_resnet50', 'deepbase_resnet101',
            'deepbase_resnet50_d8', 'deepbase_resnet50_d16', 'deepbase_resnet101_d8', 'deepbase_resnet101_d16',
            'deepbase_resnet152', 'deepbase_resnext50_32x4d', 'deepbase_resnext101_32x8d',
            'deepbase_wide_resnet50_2', 'deepbase_wide_resnet101_2']
-
 
 model_urls = {
     'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',

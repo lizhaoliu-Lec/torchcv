@@ -195,7 +195,7 @@ class OpenPoseTest(object):
         mid_num = self.configer.get('res', 'mid_point_num')
 
         for k in range(len(self.configer.get('details', 'limb_seq'))):
-            score_mid = paf_avg[:, :, [k*2, k*2+1]]
+            score_mid = paf_avg[:, :, [k * 2, k * 2 + 1]]
             candA = all_peaks[self.configer.get('details', 'limb_seq')[k][0] - 1]
             candB = all_peaks[self.configer.get('details', 'limb_seq')[k][1] - 1]
             nA = len(candA)
@@ -315,7 +315,7 @@ class OpenPoseTest(object):
                 image_bgr = cv2.addWeighted(image_bgr, 0.6, mask_canvas, 0.4, 0)
                 heatmap_avg = heatmap[j].numpy().transpose(1, 2, 0)
                 heatmap_avg = cv2.resize(heatmap_avg, (0, 0), fx=self.configer.get('network', 'stride'),
-                                     fy=self.configer.get('network', 'stride'), interpolation=cv2.INTER_CUBIC)
+                                         fy=self.configer.get('network', 'stride'), interpolation=cv2.INTER_CUBIC)
                 paf_avg = vecmap[j].numpy().transpose(1, 2, 0)
                 paf_avg = cv2.resize(paf_avg, (0, 0), fx=self.configer.get('network', 'stride'),
                                      fy=self.configer.get('network', 'stride'), interpolation=cv2.INTER_CUBIC)
@@ -330,4 +330,3 @@ class OpenPoseTest(object):
                 cv2.imwrite(os.path.join(vis_dir, '{}_{}_vis.png'.format(i, j)), image_canvas)
                 cv2.imshow('main', image_canvas)
                 cv2.waitKey()
-

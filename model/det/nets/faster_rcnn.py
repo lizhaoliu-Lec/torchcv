@@ -20,7 +20,6 @@ try:
 except ImportError:
     print('RoIPool ImportError.')
 
-
 DETECTOR_CONFIG = {
     'vgg_cfg': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512]
 }
@@ -33,7 +32,7 @@ class VGGModel(object):
     def __call__(self):
         # the 30th layer of features is relu of conv5_3
         model = vgg16(pretrained=False)
-        if self.configer.get('network', 'pretrained') is not None :
+        if self.configer.get('network', 'pretrained') is not None:
             Log.info('Loading pretrained model: {}'.format(self.configer.get('network', 'pretrained')))
             model.load_state_dict(torch.load(self.configer.get('network', 'pretrained')))
 

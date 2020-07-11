@@ -32,7 +32,7 @@ class OpenPose(nn.Module):
         for i in range(len(paf_out)):
             if 'paf_loss{}'.format(i) in self.valid_loss_dict:
                 loss_dict['paf_loss{}'.format(i)] = dict(
-                    params=[paf_out[i]*data_dict['maskmap'], data_dict['vecmap']*data_dict['maskmap']],
+                    params=[paf_out[i] * data_dict['maskmap'], data_dict['vecmap'] * data_dict['maskmap']],
                     type=torch.cuda.LongTensor([BASE_LOSS_DICT['mse_loss']]),
                     weight=torch.cuda.FloatTensor([self.valid_loss_dict['paf_loss{}'.format(i)]])
                 )
@@ -40,7 +40,7 @@ class OpenPose(nn.Module):
         for i in range(len(heatmap_out)):
             if 'heatmap_loss{}'.format(i) in self.valid_loss_dict:
                 loss_dict['heatmap_loss{}'.format(i)] = dict(
-                    params=[heatmap_out[i]*data_dict['maskmap'], data_dict['heatmap']*data_dict['maskmap']],
+                    params=[heatmap_out[i] * data_dict['maskmap'], data_dict['heatmap'] * data_dict['maskmap']],
                     type=torch.cuda.LongTensor([BASE_LOSS_DICT['mse_loss']]),
                     weight=torch.cuda.FloatTensor([self.valid_loss_dict['heatmap_loss{}'.format(i)]])
                 )
@@ -183,4 +183,4 @@ class PoseModel(nn.Module):
 
 
 if __name__ == "__main__":
-    print (OpenPose(1))
+    print(OpenPose(1))

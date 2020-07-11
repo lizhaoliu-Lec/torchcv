@@ -9,7 +9,6 @@ import os
 import argparse
 import shutil
 
-
 JOSN_DIR = 'json'
 IMAGE_DIR = 'image'
 CAT_DICT = {
@@ -80,10 +79,10 @@ class FashionDetGenerator(object):
                 shutil.copy(os.path.join(self.args.ori_img_dir, file_name),
                             os.path.join(self.train_image_dir, file_name))
 
-            print (max_cat)
+            print(max_cat)
+
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', default=None, type=str,
                         dest='save_dir', help='The directory to save the data.')

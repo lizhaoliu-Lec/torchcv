@@ -7,7 +7,6 @@ import torch.nn.functional as F
 class Linear(nn.Linear):
 
     def forward(self, input, *target):
-
         return F.linear(input, self.weight, self.bias)
 
 
@@ -16,7 +15,6 @@ class NobiasLinear(nn.Linear):
         super(NobiasLinear, self).__init__(in_features, out_features, False)
 
     def forward(self, input, *target):
-
         return F.linear(input, self.weight)
 
 
@@ -29,6 +27,7 @@ class ArcLinear(nn.Linear):
             m: margin
             cos(theta + m)
         """
+
     def __init__(self, in_features, out_features, s=30.0, m=0.50, easy_margin=False):
         super(ArcLinear, self).__init__(in_features, out_features, False)
         self.s = s
@@ -87,7 +86,8 @@ class CosineLinear(nn.Linear):
         # one_hot = one_hot.cuda() if cosine.is_cuda else one_hot
         one_hot.scatter_(1, label.view(-1, 1).long(), 1)
         # -------------torch.where(out_i = {x_i if condition_i else y_i) -------------
-        output = (one_hot * phi) + ((1.0 - one_hot) * cosine)  # you can use torch.where if your torch.__version__ is 0.4
+        output = (one_hot * phi) + (
+                    (1.0 - one_hot) * cosine)  # you can use torch.where if your torch.__version__ is 0.4
         output *= self.s
 
         return output
@@ -101,6 +101,7 @@ class SphereLinear(nn.Linear):
         m: margin
         cos(m*theta)
     """
+
     def __init__(self, in_features, out_features, m=4):
         super(SphereLinear, self).__init__(in_features, out_features, False)
         self.m = m

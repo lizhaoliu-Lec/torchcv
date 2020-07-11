@@ -25,4 +25,3 @@ class CELoss(nn.Module):
                                weight=self.weight.to(input.device) if self.weight is not None else None,
                                ignore_index=self.ignore_index, reduction=self.reduction)
         return loss
-

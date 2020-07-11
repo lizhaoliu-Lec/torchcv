@@ -22,4 +22,3 @@ class TensorHelper(object):
             tensor = tensor.squeeze(0)
 
         return tensor.type(tensor_type)
-

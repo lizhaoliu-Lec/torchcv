@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 # Author: Donny You(youansheng@gmail.com)
 # Pose Estimation running score.
 
@@ -66,4 +66,3 @@ class PoseRunningScore(object):
     def reset(self):
         self.oks_all = np.zeros(0)
         self.oks_num = 0
-

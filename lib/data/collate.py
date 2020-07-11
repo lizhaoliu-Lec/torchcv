@@ -130,10 +130,12 @@ def collate(batch, trans_dict, device_ids=None):
                 batch[i]['img']._data = TensorHelper.resize(batch[i]['img'].data,
                                                             scaled_size_hw, mode='bilinear', align_corners=True)
                 if 'labelmap' in data_keys:
-                    batch[i]['labelmap']._data = TensorHelper.resize(batch[i]['labelmap'].data, scaled_size_hw, mode='nearest')
+                    batch[i]['labelmap']._data = TensorHelper.resize(batch[i]['labelmap'].data, scaled_size_hw,
+                                                                     mode='nearest')
 
                 if 'maskmap' in data_keys:
-                    batch[i]['maskmap']._data = TensorHelper.resize(batch[i]['maskmap'].data, scaled_size_hw, mode='nearest')
+                    batch[i]['maskmap']._data = TensorHelper.resize(batch[i]['maskmap'].data, scaled_size_hw,
+                                                                    mode='nearest')
 
             pad_width = target_width - scaled_size[0]
             pad_height = target_height - scaled_size[1]
@@ -167,7 +169,7 @@ def collate(batch, trans_dict, device_ids=None):
                     Log.error('Invalid pad mode: {}'.format(trans_dict['pad_mode']))
                     exit(1)
 
-                pad = [left_pad, pad_width-left_pad, up_pad, pad_height-up_pad]
+                pad = [left_pad, pad_width - left_pad, up_pad, pad_height - up_pad]
 
                 batch[i]['img']._data = F.pad(batch[i]['img'].data, pad=pad, value=0)
 

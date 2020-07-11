@@ -86,4 +86,3 @@ class DataLoader(object):
         )
 
         return valloader
-

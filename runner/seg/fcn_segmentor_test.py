@@ -105,7 +105,7 @@ class FCNSegmentorTest(object):
     def sscrop_test(self, in_data_dict, params_dict):
         data_dict = self.blob_helper.get_blob(in_data_dict, scale=1.0)
         if any(image.size()[2] < params_dict['crop_size'][0] or image.size()[1] < params_dict['crop_size'][1]
-                   for image in DCHelper.tolist(data_dict['img'])):
+               for image in DCHelper.tolist(data_dict['img'])):
             results = self._predict(data_dict)
         else:
             results = self._crop_predict(data_dict, params_dict['crop_size'], params_dict['crop_stride_ratio'])
@@ -179,8 +179,8 @@ class FCNSegmentorTest(object):
             index = 0
             for height in height_starts_list[i]:
                 for width in width_starts_list[i]:
-                    total_logits[i][height:height+crop_size[1], width:width+crop_size[0]] += out_list[i][index]
-                    count_predictions[i][height:height+crop_size[1], width:width+crop_size[0]] += 1
+                    total_logits[i][height:height + crop_size[1], width:width + crop_size[0]] += out_list[i][index]
+                    count_predictions[i][height:height + crop_size[1], width:width + crop_size[0]] += 1
                     index += 1
 
         for i in range(len(total_logits)):
@@ -193,11 +193,11 @@ class FCNSegmentorTest(object):
         return total_logits
 
     def _decide_intersection(self, total_length, crop_length, crop_stride_ratio):
-        stride = int(crop_length * crop_stride_ratio)            # set the stride as the paper do
+        stride = int(crop_length * crop_stride_ratio)  # set the stride as the paper do
         times = (total_length - crop_length) // stride + 1
         cropped_starting = []
         for i in range(times):
-            cropped_starting.append(stride*i)
+            cropped_starting.append(stride * i)
 
         if total_length - cropped_starting[-1] > crop_length:
             cropped_starting.append(total_length - crop_length)  # must cover the total image
@@ -228,5 +228,3 @@ class FCNSegmentorTest(object):
         label_dst = np.array(label_dst, dtype=np.uint8)
 
         return label_dst
-
-

@@ -9,7 +9,6 @@ from cv2 import (CAP_PROP_FRAME_WIDTH, CAP_PROP_FRAME_HEIGHT, CAP_PROP_FPS,
                  CAP_PROP_FRAME_COUNT, CAP_PROP_FOURCC,
                  CAP_PROP_POS_FRAMES, VideoWriter_fourcc)
 
-
 from tools.helper.file_helper import FileHelper
 from tools.util.progressbar import track_progress
 
@@ -277,8 +276,6 @@ class VideoReader(object):
         self._vcap.release()
 
 
-
-
 class VideoHelper(object):
 
     @staticmethod
@@ -469,4 +466,3 @@ class VideoHelper(object):
                 img = cv2.imread(filename)
                 vwriter.write(img)
         vwriter.release()
-

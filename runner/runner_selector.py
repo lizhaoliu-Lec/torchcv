@@ -22,7 +22,6 @@ from runner.gan.face_gan import FaceGAN
 from runner.gan.face_gan_test import FaceGANTest
 from lib.tools.util.logger import Logger as Log
 
-
 POSE_METHOD_DICT = {
     'open_pose': PoseEstimator,
     'conv_pose_machine': PoseEstimator,
@@ -125,4 +124,3 @@ class RunnerSelector(object):
             return GAN_METHOD_DICT[key](self.configer)
         else:
             return GAN_TEST_DICT[key](self.configer)
-

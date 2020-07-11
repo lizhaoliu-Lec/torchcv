@@ -14,6 +14,7 @@ from torch.nn.parallel._functions import Broadcast
 from torch.nn.parallel.data_parallel import DataParallel
 from torch.nn.parallel.parallel_apply import get_a_var
 from torch.nn.parallel.scatter_gather import gather
+
 try:
     from torch._six import container_abcs
 except:
@@ -40,6 +41,7 @@ class ParallelModel(DataParallel):
         >>> net = ParallelModel(model, device_ids=[0, 1, 2])
         >>> y = net(x)
     """
+
     def __init__(self, module, device_ids=None, output_device=None, dim=0, gather_=True):
         super(ParallelModel, self).__init__(module, device_ids, output_device, dim)
         self.gather_ = gather_
@@ -62,6 +64,7 @@ class ParallelCriterion(DataParallel):
         >>> y = net(x)
         >>> loss = criterion(y, target)
     """
+
     def __init__(self, module, device_ids=None, output_device=None, dim=0):
         super(ParallelCriterion, self).__init__(module, device_ids, output_device, dim)
 
@@ -74,7 +77,7 @@ class ParallelCriterion(DataParallel):
         if not self.device_ids:
             return self.module(inputs, **kwargs)
 
-        kwargs = (kwargs, ) * len(inputs)
+        kwargs = (kwargs,) * len(inputs)
         if len(self.device_ids) == 1:
             return self.module(inputs[0], **kwargs[0])
 
@@ -122,7 +125,7 @@ def _criterion_parallel_apply(modules, inputs, kwargs_tup=None, devices=None):
 
     if len(modules) > 1:
         threads = [threading.Thread(target=_worker,
-                                    args=(i, module, input, kwargs, device),)
+                                    args=(i, module, input, kwargs, device), )
                    for i, (module, input, kwargs, device) in
                    enumerate(zip(modules, inputs, kwargs_tup, devices))]
 

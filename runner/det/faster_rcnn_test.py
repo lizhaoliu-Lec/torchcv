@@ -91,19 +91,19 @@ class FastRCNNTest(object):
         else:
             cls_prob = roi_scores
 
-        cls_label = torch.LongTensor([i for i in range(num_classes)])\
+        cls_label = torch.LongTensor([i for i in range(num_classes)]) \
             .contiguous().view(1, num_classes).repeat(indices_and_rois.size(0), 1).to(roi_locs.device)
 
         output = [None for _ in range(test_rois_num.size(0))]
         start_index = 0
         for i in range(test_rois_num.size(0)):
-            tmp_dst_bbox = dst_bbox[start_index:start_index+test_rois_num[i]]
+            tmp_dst_bbox = dst_bbox[start_index:start_index + test_rois_num[i]]
             tmp_dst_bbox[:, :, 0::2] = tmp_dst_bbox[:, :, 0::2].clamp(min=0, max=metas[i]['border_wh'][0] - 1)
             tmp_dst_bbox[:, :, 1::2] = tmp_dst_bbox[:, :, 1::2].clamp(min=0, max=metas[i]['border_wh'][1] - 1)
             tmp_dst_bbox *= (metas[i]['ori_img_size'][0] / metas[i]['border_wh'][0])
 
-            tmp_cls_prob = cls_prob[start_index:start_index+test_rois_num[i]]
-            tmp_cls_label = cls_label[start_index:start_index+test_rois_num[i]]
+            tmp_cls_prob = cls_prob[start_index:start_index + test_rois_num[i]]
+            tmp_cls_label = cls_label[start_index:start_index + test_rois_num[i]]
             start_index += test_rois_num[i]
 
             mask = (tmp_cls_prob > configer.get('res', 'val_conf_thre')) & (tmp_cls_label > 0)
@@ -112,8 +112,8 @@ class FastRCNNTest(object):
             if tmp_dst_bbox.numel() == 0:
                 continue
 
-            tmp_cls_prob = tmp_cls_prob[mask].contiguous().view(-1,).unsqueeze(1)
-            tmp_cls_label = tmp_cls_label[mask].contiguous().view(-1,).unsqueeze(1)
+            tmp_cls_prob = tmp_cls_prob[mask].contiguous().view(-1, ).unsqueeze(1)
+            tmp_cls_label = tmp_cls_label[mask].contiguous().view(-1, ).unsqueeze(1)
 
             valid_preds = torch.cat((tmp_dst_bbox, tmp_cls_prob.float(), tmp_cls_label.float()), 1)
 

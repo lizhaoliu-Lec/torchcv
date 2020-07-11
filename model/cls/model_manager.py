@@ -10,7 +10,6 @@ from model.cls.nets.distill_model import DistillModel
 from model.cls.loss.loss import Loss
 from lib.tools.util.logger import Logger as Log
 
-
 CLS_MODEL_DICT = {
     'base_model': BaseModel,
     'cls_model': ClsModel,

@@ -48,9 +48,9 @@ class FocalLoss(nn.Module):
         t = Variable(t).cuda()  # [N, 20]
 
         logit = F.softmax(x)
-        logit = logit.clamp(1e-7, 1.-1e-7)
+        logit = logit.clamp(1e-7, 1. - 1e-7)
         conf_loss_tmp = -1 * t.float() * torch.log(logit)
-        conf_loss_tmp = alpha * conf_loss_tmp * (1-logit)**gamma
+        conf_loss_tmp = alpha * conf_loss_tmp * (1 - logit) ** gamma
         conf_loss = conf_loss_tmp.sum()
 
         return conf_loss

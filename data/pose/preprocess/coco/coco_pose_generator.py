@@ -13,7 +13,6 @@ from PIL import Image
 
 from pycocotools.coco import COCO
 
-
 COCO_TO_OURS = [0, 15, 14, 17, 16, 5, 2, 6, 3, 7, 4, 11, 8, 12, 9, 13, 10]
 
 JOSN_DIR = 'json'
@@ -154,7 +153,7 @@ class CocoPoseGenerator(object):
         for person in persons:
             dic = dict()
             dic['bbox'] = person['bbox']
-            dic['kpts'] = np.zeros((18,3)).tolist()
+            dic['kpts'] = np.zeros((18, 3)).tolist()
             for i in range(17):
                 dic['kpts'][COCO_TO_OURS[i]][0] = person['kpts'][i][0]
                 dic['kpts'][COCO_TO_OURS[i]][1] = person['kpts'][i][1]
@@ -174,7 +173,6 @@ class CocoPoseGenerator(object):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--root_dir', default=None, type=str,
                         dest='root_dir', help='The directory to save the ground truth.')

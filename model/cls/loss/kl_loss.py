@@ -20,5 +20,4 @@ class KLLoss(nn.Module):
         self.kl_loss = nn.KLDivLoss(reduction=reduction)
 
     def forward(self, inputs, targets):
-
         return self.kl_loss(F.log_softmax(inputs, dim=-1), F.softmax(targets, dim=-1))

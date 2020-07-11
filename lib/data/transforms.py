@@ -19,10 +19,11 @@ class Normalize(object):
     Returns:
         Tensor: Normalized tensor.
     """
+
     def __init__(self, div_value, mean, std):
         self.div_value = div_value
         self.mean = mean
-        self.std =std
+        self.std = std
 
     def __call__(self, inputs):
         inputs = inputs.div(self.div_value)
@@ -43,10 +44,11 @@ class DeNormalize(object):
     Returns:
         Tensor: Normalized tensor.
     """
+
     def __init__(self, div_value, mean, std):
         self.div_value = div_value
         self.mean = mean
-        self.std =std
+        self.std = std
 
     def __call__(self, inputs):
         result = inputs.clone()
@@ -67,6 +69,7 @@ class ToTensor(object):
     Returns:
         Tensor: Converted image.
     """
+
     def __call__(self, inputs):
         if isinstance(inputs, Image.Image):
             channels = len(inputs.mode)
@@ -89,6 +92,7 @@ class ReLabel(object):
     """
       255 indicate the background, relabel 255 to some value.
     """
+
     def __init__(self, olabel, nlabel):
         self.olabel = olabel
         self.nlabel = nlabel
@@ -110,7 +114,3 @@ class Compose(object):
             inputs = t(inputs)
 
         return inputs
-
-
-
-

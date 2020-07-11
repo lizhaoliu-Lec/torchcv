@@ -69,7 +69,7 @@ if __name__ == "__main__":
                         dest='network.backbone', help='The base network of model.')
     parser.add_argument('--norm_type', default=None, type=str,
                         dest='network.norm_type', help='The BN type of the network.')
-    parser.add_argument('--syncbn',  type=str2bool, nargs='?', default=False,
+    parser.add_argument('--syncbn', type=str2bool, nargs='?', default=False,
                         dest='network.syncbn', help='Whether to sync BN.')
     parser.add_argument('--pretrained', type=str, default=None,
                         dest='network.pretrained', help='The path to pretrained model.')

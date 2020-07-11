@@ -2,9 +2,7 @@ import torch
 import torch.nn as nn
 from .utils import load_state_dict_from_url
 
-
 __all__ = ['AlexNet', 'alexnet']
-
 
 model_urls = {
     'alexnet': 'https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',

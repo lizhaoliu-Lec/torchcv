@@ -56,7 +56,8 @@ class RegionLoss(nn.Module):
                     # Get shape of gt box
                     gt_box = torch.FloatTensor([0, 0, gw, gh]).unsqueeze(0)
                     # Get shape of anchor box
-                    anchor_shapes = torch.from_numpy(np.concatenate((np.zeros((num_anchors, 2)), np.array(anchors)), 1)).float()
+                    anchor_shapes = torch.from_numpy(
+                        np.concatenate((np.zeros((num_anchors, 2)), np.array(anchors)), 1)).float()
                     # Calculate iou between gt and anchor shapes
                     anch_ious = DetHelper.bbox_iou(gt_box, anchor_shapes)
                     # Where the overlap is larger than threshold set mask to zero (ignore)

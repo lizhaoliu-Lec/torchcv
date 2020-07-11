@@ -56,7 +56,7 @@ class MultiBoxLoss(nn.Module):
         _, rank = idx.sort(1)  # [N,8732]
 
         num_pos = pos.long().sum(1)  # [N,1]
-        num_neg = torch.clamp(3 * num_pos, min=1, max=num_boxes-1)  # [N,1]
+        num_neg = torch.clamp(3 * num_pos, min=1, max=num_boxes - 1)  # [N,1]
         neg = rank < num_neg.unsqueeze(1).expand_as(rank)  # [N,8732]
         return neg
 
@@ -98,17 +98,18 @@ class MultiBoxLoss(nn.Module):
         pos_mask = pos.unsqueeze(2).expand_as(loc_preds)  # [N, 8732, 4]
         pos_loc_preds = loc_preds[pos_mask].view(-1, 4)  # [pos,4]
         pos_loc_targets = loc_targets[pos_mask].view(-1, 4)  # [pos,4]
-        loc_loss = self.smooth_l1_loss(pos_loc_preds, pos_loc_targets)  # F.smooth_l1_loss(pos_loc_preds, pos_loc_targets, reduction='sum')
+        loc_loss = self.smooth_l1_loss(pos_loc_preds,
+                                       pos_loc_targets)  # F.smooth_l1_loss(pos_loc_preds, pos_loc_targets, reduction='sum')
 
         # conf_loss.
         conf_loss = self._cross_entropy_loss(conf_preds.view(-1, self.num_classes), conf_targets.view(-1))  # [N*8732,]
-        neg = self._hard_negative_mining(conf_loss, pos)    # [N,8732]
+        neg = self._hard_negative_mining(conf_loss, pos)  # [N,8732]
         pos_mask = pos.unsqueeze(2).expand_as(conf_preds)  # [N,8732,21]
         neg_mask = neg.unsqueeze(2).expand_as(conf_preds)  # [N,8732,21]
         mask = (pos_mask + neg_mask).gt(0)
         pos_and_neg = (pos + neg).gt(0)
         preds = conf_preds[mask].view(-1, self.num_classes)  # [pos + neg,21]
-        targets = conf_targets[pos_and_neg]                  # [pos + neg,]
+        targets = conf_targets[pos_and_neg]  # [pos + neg,]
         conf_loss = F.cross_entropy(preds, targets, reduction='sum', ignore_index=-1)
 
         if num_matched_boxes > 0:

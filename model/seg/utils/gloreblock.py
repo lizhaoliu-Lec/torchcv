@@ -36,7 +36,6 @@ class GloReModule(nn.Module):
         return x
 
     def forward(self, x):
-
         x_sqz, b = x, x
 
         x_sqz = self.phi(x_sqz)
@@ -77,6 +76,6 @@ class GloReModule(nn.Module):
         y = self.bn3(y)
         y = self.relu(y)
 
-        out = x+y
+        out = x + y
 
         return out

@@ -12,7 +12,6 @@ from model.det.loss.smooth_l1_loss import SmoothL1Loss
 from model.det.loss.ce_loss import CELoss
 from model.det.loss.region_loss import RegionLoss
 
-
 BASE_LOSS_DICT = dict(
     multibox_loss=0,
     smooth_l1_loss=1,

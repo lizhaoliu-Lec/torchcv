@@ -39,10 +39,11 @@ class DCHelper(object):
     @staticmethod
     def todc(data_list, samples_per_gpu=True, stack=False, cpu_only=False, device_ids=None, concat=False):
         if not samples_per_gpu:
-             if not stack:
-                 return DataContainer(data_list, stack=stack, samples_per_gpu=samples_per_gpu, cpu_only=cpu_only)
-             else:
-                 return DataContainer(torch.stack(data_list, 0), stack=stack, samples_per_gpu=samples_per_gpu, cpu_only=cpu_only)
+            if not stack:
+                return DataContainer(data_list, stack=stack, samples_per_gpu=samples_per_gpu, cpu_only=cpu_only)
+            else:
+                return DataContainer(torch.stack(data_list, 0), stack=stack, samples_per_gpu=samples_per_gpu,
+                                     cpu_only=cpu_only)
 
         device_ids = list(range(torch.cuda.device_count())) if device_ids is None else device_ids
         samples = (len(data_list) - 1 + len(device_ids)) // len(device_ids)

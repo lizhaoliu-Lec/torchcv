@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 # Author: Donny You(youansheng@gmail.com)
 # Make proposals that each consists of all possible keypoints.
 
@@ -32,9 +32,9 @@ class SubtreeGenerator(object):
 
         # Get the salient point and its score > thre_point
         peaks_binary = np.logical_and.reduce(
-                            (s_map >= map_left, s_map >= map_right,
-                             s_map >= map_up, s_map >= map_down,
-                             s_map > self.configer.get('vis', 'part_threshold')))
+            (s_map >= map_left, s_map >= map_right,
+             s_map >= map_up, s_map >= map_down,
+             s_map > self.configer.get('vis', 'part_threshold')))
 
         peaks = list(zip(np.nonzero(peaks_binary)[1],
                          np.nonzero(peaks_binary)[0]))
@@ -48,11 +48,12 @@ class SubtreeGenerator(object):
         special_k = list()
 
         for k in range(len(self.configer.get('coco', 'limb_seq'))):
-            canda = all_peaks[self.configer.get('coco', 'limb_seq')[k][0]-1]
-            candb = all_peaks[self.configer.get('coco', 'limb_seq')[k][1]-1]
+            canda = all_peaks[self.configer.get('coco', 'limb_seq')[k][0] - 1]
+            candb = all_peaks[self.configer.get('coco', 'limb_seq')[k][1] - 1]
             lena = len(canda)
             lenb = len(candb)
-            print "%d %d\n" % (lena, lenb)
+            print
+            "%d %d\n" % (lena, lenb)
 
             if lena != 0 and lenb != 0:
                 connection_candidate = []
@@ -60,8 +61,9 @@ class SubtreeGenerator(object):
                     for j in range(lenb):
                         vec1 = vecmap[self.configer.get('coco', 'limb_seq')[k][0], canda[i][1], canda[i][0]]
                         vec2 = vecmap[self.configer.get('coco', 'limb_seq')[k][1], candb[j][1], candb[j][0]]
-                        score_with_dist_prior = 1.0 - np.sqrt(((vec1 - vec2)*(vec1 - vec2)).sum())
-                        print score_with_dist_prior
+                        score_with_dist_prior = 1.0 - np.sqrt(((vec1 - vec2) * (vec1 - vec2)).sum())
+                        print
+                        score_with_dist_prior
 
                         if score_with_dist_prior > self.configer.get('vis', 'limb_threshold'):
                             connection_candidate.append([i, j,
@@ -129,15 +131,15 @@ class SubtreeGenerator(object):
                             subset[j][indexb] = partbs[i]
                             subset[j][-1] += 1
                             subset[j][-2] += candidate[partbs[i].astype(int), 2] + connection_all[k][i][2]
-                    elif found == 2: # if found equals to 2 and disjoint, merge them
+                    elif found == 2:  # if found equals to 2 and disjoint, merge them
                         j1, j2 = subset_idx
                         membership = ((subset[j1] >= 0).astype(int) + (subset[j2] >= 0).astype(int))[:-2]
-                        if len(np.nonzero(membership == 2)[0]) == 0: # merge
+                        if len(np.nonzero(membership == 2)[0]) == 0:  # merge
                             subset[j1][:-2] += (subset[j2][:-2] + 1)
                             subset[j1][-2:] += subset[j2][-2:]
                             subset[j1][-2] += connection_all[k][i][2]
                             subset = np.delete(subset, j2, 0)
-                        else: # as like found == 1
+                        else:  # as like found == 1
                             subset[j1][indexb] = partbs[i]
                             subset[j1][-1] += 1
                             subset[j1][-2] += candidate[partbs[i].astype(int), 2] + connection_all[k][i][2]
@@ -160,14 +162,14 @@ class SubtreeGenerator(object):
         return subset
 
     def __get_all_peaks(self, heatmap, vecmap, mask):
-        all_peaks = []   # all of the possible points by classes.
+        all_peaks = []  # all of the possible points by classes.
         peak_counter = 0
 
         for part in range(self.configer.get('num_keypoints')):
             map_ori = heatmap[:, :, part]
             peaks_with_score = self.__get_peaks(map_ori)
             ids = range(peak_counter, peak_counter + len(peaks_with_score))
-            peaks_with_score_and_id = [peaks_with_score[i] + (ids[i], ) for i in range(len(ids))]
+            peaks_with_score_and_id = [peaks_with_score[i] + (ids[i],) for i in range(len(ids))]
 
             # print len(peaks_with_score_and_id)
             all_peaks.append(peaks_with_score_and_id)
@@ -178,19 +180,18 @@ class SubtreeGenerator(object):
 
     def __search_subtree(self, inputs, mask):
         heatmap = inputs.view(-1, self.l_vec, inputs.size(2), inputs.size(3))
-        heatmap = torch.sqrt((heatmap*heatmap).sum(1)).squeeze()
+        heatmap = torch.sqrt((heatmap * heatmap).sum(1)).squeeze()
         vecmap = inputs.view(-1, self.l_vec, inputs.size(2), inputs.size(3))
 
         all_peaks, candidate = self.__get_all_peaks(heatmap, mask)
 
-        connection_all = [] # save all of the possible lines by classes.
-        special_k = []      # save the lines, which haven't legal points.
+        connection_all = []  # save all of the possible lines by classes.
+        special_k = []  # save the lines, which haven't legal points.
 
         connection_all, special_k = self.__get_connections(all_peaks, vecmap)
 
         subset = self.__get_proposals(connection_all, candidate, special_k)
         return subset
-
 
     def __make_features(self, proposals, inputs):
         # find capsules for every proposals.

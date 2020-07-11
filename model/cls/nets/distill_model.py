@@ -25,7 +25,8 @@ class DistillModel(nn.Module):
             for m in self.main.parameters():
                 m.requires_grad = False
         else:
-            assert(configer.get('network.distill_method', default=None) in (None, 'teacher-student', 'student-student'))
+            assert (configer.get('network.distill_method', default=None) in (
+            None, 'teacher-student', 'student-student'))
 
     def forward(self, data_dict):
         main_out_dict, main_label_dict, main_loss_dict = self.main(data_dict)

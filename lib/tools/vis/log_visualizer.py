@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 
 class LogVisualizer(object):
 
-
     def vis_loss(self, log_file):
 
         with open(log_file, 'r') as file_stream:
@@ -78,7 +77,7 @@ class LogVisualizer(object):
 
 
 if __name__ == "__main__":
-    #if len(sys.argv) != 2:
+    # if len(sys.argv) != 2:
     #    print >> sys.stderr, "Need one args: log_file"
     #    exit(0)
 

@@ -85,7 +85,7 @@ class PoseParser(object):
     def link_points(self, image_canvas, info_tree):
         for object in info_tree['objects']:
             for i in range(len(self.configer.get('details', 'limb_seq'))):
-                two_points = np.array(object['kpts'])[np.array(self.configer.get('details', 'limb_seq')[i])-1]
+                two_points = np.array(object['kpts'])[np.array(self.configer.get('details', 'limb_seq')[i]) - 1]
                 if -1 in two_points[:, 2]:
                     continue
 

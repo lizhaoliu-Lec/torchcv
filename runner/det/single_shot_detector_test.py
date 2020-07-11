@@ -74,7 +74,7 @@ class SingleShotDetectorTest(object):
             image_pred[:, 1] *= meta[i]['ori_img_size'][1]
             image_pred[:, 2] *= meta[i]['ori_img_size'][0]
             image_pred[:, 3] *= meta[i]['ori_img_size'][1]
-            ids = labels[i].squeeze(1).nonzero().contiguous().view(-1,)
+            ids = labels[i].squeeze(1).nonzero().contiguous().view(-1, )
             if ids.numel() == 0:
                 continue
 
@@ -114,5 +114,3 @@ class SingleShotDetectorTest(object):
         json_dict['objects'] = object_list
 
         return json_dict
-
-

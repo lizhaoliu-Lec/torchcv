@@ -72,9 +72,9 @@ class DataLoader(object):
         dataset = 'val' if dataset is None else dataset
         if self.configer.get('dataset', default=None) == 'default_cpm':
             dataset = DefaultCPMDataset(root_dir=self.configer.get('data', 'data_dir'), dataset=dataset,
-                                     aug_transform=self.aug_val_transform,
-                                     img_transform=self.img_transform,
-                                     configer=self.configer)
+                                        aug_transform=self.aug_val_transform,
+                                        img_transform=self.img_transform,
+                                        configer=self.configer)
 
         elif self.configer.get('dataset', default=None) == 'default_openpose':
             dataset = DefaultOpenPoseDataset(root_dir=self.configer.get('data', 'data_dir'), dataset=dataset,

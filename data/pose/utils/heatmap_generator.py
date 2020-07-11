@@ -49,9 +49,9 @@ class HeatmapGenerator(object):
                 mask = exponent <= 4.6052
                 cofid_map = np.exp(-exponent)
                 cofid_map = np.multiply(mask, cofid_map)
-                heatmap[j:j+1, :, :] += cofid_map[np.newaxis, :, :]
+                heatmap[j:j + 1, :, :] += cofid_map[np.newaxis, :, :]
 
-                heatmap[j:j+1, :, :][heatmap[j:j+1, :, :] > 1.0] = 1.0
+                heatmap[j:j + 1, :, :][heatmap[j:j + 1, :, :] > 1.0] = 1.0
 
             heatmap[num_keypoints, :, :] = 1.0 - np.max(heatmap[:-1, :, :], axis=0)
 

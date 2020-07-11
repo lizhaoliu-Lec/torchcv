@@ -2,7 +2,6 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-
 from lib.model.module_helper import ModuleHelper
 
 
@@ -42,7 +41,9 @@ class _SelfAttentionBlock(nn.Module):
         N X C X H X W
         position-aware context features.(w/o concate or add with the input)
     '''
-    def __init__(self, low_in_channels, high_in_channels, key_channels, value_channels, out_channels=None, scale=1, norm_type=None,psp_size=(1,3,6,8)):
+
+    def __init__(self, low_in_channels, high_in_channels, key_channels, value_channels, out_channels=None, scale=1,
+                 norm_type=None, psp_size=(1, 3, 6, 8)):
         super(_SelfAttentionBlock, self).__init__()
         self.scale = scale
         self.in_channels = low_in_channels
@@ -96,7 +97,8 @@ class _SelfAttentionBlock(nn.Module):
 
 
 class SelfAttentionBlock2D(_SelfAttentionBlock):
-    def __init__(self, low_in_channels, high_in_channels, key_channels, value_channels, out_channels=None, scale=1, norm_type=None,psp_size=(1,3,6,8)):
+    def __init__(self, low_in_channels, high_in_channels, key_channels, value_channels, out_channels=None, scale=1,
+                 norm_type=None, psp_size=(1, 3, 6, 8)):
         super(SelfAttentionBlock2D, self).__init__(low_in_channels,
                                                    high_in_channels,
                                                    key_channels,
@@ -120,11 +122,11 @@ class AFNB(nn.Module):
     """
 
     def __init__(self, low_in_channels, high_in_channels, out_channels, key_channels, value_channels, dropout,
-                 sizes=([1]), norm_type=None,psp_size=(1,3,6,8)):
+                 sizes=([1]), norm_type=None, psp_size=(1, 3, 6, 8)):
         super(AFNB, self).__init__()
         self.stages = []
         self.norm_type = norm_type
-        self.psp_size=psp_size
+        self.psp_size = psp_size
         self.stages = nn.ModuleList(
             [self._make_stage([low_in_channels, high_in_channels], out_channels, key_channels, value_channels, size) for
              size in sizes])
@@ -151,4 +153,3 @@ class AFNB(nn.Module):
             context += priors[i]
         output = self.conv_bn_dropout(torch.cat([context, high_feats], 1))
         return output
-

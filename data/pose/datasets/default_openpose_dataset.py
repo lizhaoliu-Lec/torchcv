@@ -20,7 +20,7 @@ from data.pose.utils.paf_generator import PafGenerator
 class DefaultOpenPoseDataset(data.Dataset):
 
     def __init__(self, root_dir=None, dataset=None,
-                 aug_transform=None,img_transform=None, configer=None):
+                 aug_transform=None, img_transform=None, configer=None):
         self.configer = configer
         self.aug_transform = aug_transform
         self.img_transform = img_transform

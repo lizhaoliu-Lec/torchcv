@@ -80,8 +80,6 @@ class DataLoader(object):
 
         return trainloader
 
-
-
     def get_valloader(self, dataset=None):
         dataset = 'val' if dataset is None else dataset
         if self.configer.get('dataset') == 'default_pix2pix':
@@ -102,7 +100,7 @@ class DataLoader(object):
                                             aug_transform=self.aug_val_transform,
                                             img_transform=self.img_transform,
                                             configer=self.configer)
-    
+
         else:
             Log.error('{} val loader is invalid.'.format(self.configer.get('val', 'loader')))
             exit(1)

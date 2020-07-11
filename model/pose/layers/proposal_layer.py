@@ -12,7 +12,6 @@ from scipy.ndimage.filters import gaussian_filter
 from torch.autograd import Variable
 
 
-
 class ProposalLayer(object):
     def __init__(self, configer):
         self.configer = configer
@@ -30,9 +29,9 @@ class ProposalLayer(object):
 
         # Get the salient point and its score > thre_point
         peaks_binary = np.logical_and.reduce(
-                            (s_map >= map_left, s_map >= map_right,
-                             s_map >= map_up, s_map >= map_down,
-                             s_map > self.configer.get('vis', 'part_threshold')))
+            (s_map >= map_left, s_map >= map_right,
+             s_map >= map_up, s_map >= map_down,
+             s_map > self.configer.get('vis', 'part_threshold')))
 
         stride = self.configer.get('network', 'stride')
         peaks = list(zip(np.nonzero(peaks_binary)[1],
@@ -57,7 +56,7 @@ class ProposalLayer(object):
         return sim_array
 
     def __get_all_peaks(self, heatmap):
-        all_peaks = []   # all of the possible points by classes.
+        all_peaks = []  # all of the possible points by classes.
         peak_counter = 0
 
         for part in range(self.configer.get('num_keypoints')):
@@ -92,9 +91,9 @@ class ProposalLayer(object):
         return top_k_index[:self.configer.get('vis', 'top_k')]
 
     def __get_subsets(self, all_peaks, sim_array):
-        subsets = -1 * np.ones((0, self.configer.get('num_keypoints')+2))
+        subsets = -1 * np.ones((0, self.configer.get('num_keypoints') + 2))
         for i in range(self.configer.get('num_keypoints')):
-            subsets_new = -1 * np.ones((0, self.configer.get('num_keypoints')+2))
+            subsets_new = -1 * np.ones((0, self.configer.get('num_keypoints') + 2))
             update_index = list()
             for peak in all_peaks[i]:
                 index_list = self.__find_top_k_subsets(peak, subsets, sim_array)
@@ -106,7 +105,7 @@ class ProposalLayer(object):
                         update_index.append(index)
 
                 # Use score threshold to filter part ones.
-                subset = -1 * np.ones(self.configer.get('num_keypoints')+2)
+                subset = -1 * np.ones(self.configer.get('num_keypoints') + 2)
                 subset[i] = peak[3]
                 subsets_new = np.vstack([subsets_new, subset])
 
@@ -188,7 +187,7 @@ class ProposalLayer(object):
         return features, labels
 
     def __get_label(self, proposal, kpts, candidates):
-        label = Variable(torch.zeros(self.configer.get('num_keypoints'),), require_grad=True).cuda()
+        label = Variable(torch.zeros(self.configer.get('num_keypoints'), ), require_grad=True).cuda()
 
         stride = 8.0
         max_score = 0.0
@@ -198,7 +197,7 @@ class ProposalLayer(object):
         for i in range(len(kpts)):
             score_temp = 0.0
             visiable_count = 0
-            label_temp = Variable(torch.zeros(self.configer.get('num_keypoints'),), require_grad=True).cuda()
+            label_temp = Variable(torch.zeros(self.configer.get('num_keypoints'), ), require_grad=True).cuda()
             for j in range(self.configer.get('num_keypoints')):
                 if kpts[i][j][2] > 1:
                     continue
@@ -217,7 +216,7 @@ class ProposalLayer(object):
                 score_temp += math.exp(-dis)
                 label_temp[j] = math.exp(-dis)
 
-            if score_temp/(visiable_count*1.0) > max_score:
+            if score_temp / (visiable_count * 1.0) > max_score:
                 max_score = score_temp
                 label = label_temp
 

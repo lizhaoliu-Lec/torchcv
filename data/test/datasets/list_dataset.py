@@ -17,7 +17,7 @@ class ListDataset(data.Dataset):
     def __init__(self, root_dir=None, list_path=None, aug_transform=None, img_transform=None, configer=None):
         super(ListDataset, self).__init__()
         self.configer = configer
-        self.aug_transform=aug_transform
+        self.aug_transform = aug_transform
         self.img_transform = img_transform
         self.item_list = self.__read_list(root_dir, list_path)
 

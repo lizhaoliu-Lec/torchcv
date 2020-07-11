@@ -16,9 +16,9 @@ from model.seg.loss.loss import BASE_LOSS_DICT
 class _ConvBatchNormReluBlock(nn.Module):
     def __init__(self, inplanes, outplanes, kernel_size, stride, padding=1, dilation=1, norm_type=None):
         super(_ConvBatchNormReluBlock, self).__init__()
-        self.conv = nn.Conv2d(in_channels=inplanes,out_channels=outplanes,
+        self.conv = nn.Conv2d(in_channels=inplanes, out_channels=outplanes,
                               kernel_size=kernel_size, stride=stride, padding=padding,
-                              dilation = dilation, bias=False)
+                              dilation=dilation, bias=False)
         self.bn_relu = ModuleHelper.BNReLU(outplanes, norm_type=norm_type)
 
     def forward(self, x):
@@ -127,12 +127,12 @@ class PSPNet(nn.Sequential):
 
 
 if __name__ == '__main__':
-    i = torch.Tensor(1,3,512,512).cuda()
+    i = torch.Tensor(1, 3, 512, 512).cuda()
     model = PSPNet(num_classes=19).cuda()
     model.eval()
     o, _ = model(i)
-    #print(o.size())
-    #final_out = F.upsample(o,scale_factor=8)
-    #print(final_out.size())
+    # print(o.size())
+    # final_out = F.upsample(o,scale_factor=8)
+    # print(final_out.size())
     print(o.size())
     print(_.size())

@@ -11,7 +11,6 @@ from model.seg.nets.annn import asymmetric_non_local_network
 from model.seg.loss.loss import Loss
 from lib.tools.util.logger import Logger as Log
 
-
 SEG_MODEL_DICT = {
     'deeplabv3': DeepLabV3,
     'pspnet': PSPNet,

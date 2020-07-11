@@ -31,7 +31,7 @@ class FaceAlignmentor(object):
         return out
 
     def align_face(self, img, f5pt):
-        ang_tan = (f5pt[0,1] - f5pt[1, 1]) / (f5pt[0, 0]-f5pt[1, 0])
+        ang_tan = (f5pt[0, 1] - f5pt[1, 1]) / (f5pt[0, 0] - f5pt[1, 0])
         rotate_degree = math.atan(ang_tan) / math.pi * 180
         height, width, _ = img[0].shape if isinstance(img, (list, tuple)) else img.shape
 
@@ -77,9 +77,9 @@ class FaceAlignmentor(object):
         f5pt[:, 1] -= crop_y
         if isinstance(img, (list, tuple)):
             for i in range(len(img)):
-                img[i] = img[i][crop_y:crop_y+self.crop_size, crop_x:crop_x+self.crop_size]
+                img[i] = img[i][crop_y:crop_y + self.crop_size, crop_x:crop_x + self.crop_size]
         else:
-            img = img[crop_y:crop_y+self.crop_size, crop_x:crop_x+self.crop_size]
+            img = img[crop_y:crop_y + self.crop_size, crop_x:crop_x + self.crop_size]
         return img, f5pt
 
     def process(self, data_dir):
@@ -129,7 +129,8 @@ class FaceAlignmentor(object):
                 Log.info('Invliad face detected in {}'.format(file_path))
                 continue
             ImageHelper.save(ImageHelper.rgb2bgr(face_depth[0]), os.path.join(new_data_dir, filename))
-            ImageHelper.save(ImageHelper.rgb2bgr(face_depth[1]), os.path.join(new_data_dir, filename.replace('rgb', 'depth')))
+            ImageHelper.save(ImageHelper.rgb2bgr(face_depth[1]),
+                             os.path.join(new_data_dir, filename.replace('rgb', 'depth')))
 
 
 if __name__ == '__main__':

@@ -23,7 +23,7 @@ class ModuleHelper(object):
         model = base.__dict__[backbone](**kwargs)
         model = ModuleHelper.load_model(model, pretrained=pretrained, all_match=False)
         return model
-        
+
     @staticmethod
     def BNReLU(num_features, norm_type=None, **kwargs):
         if norm_type == 'batchnorm':
@@ -208,4 +208,3 @@ class ModuleHelper(object):
                 module.weight, mode=mode, nonlinearity=nonlinearity)
         if hasattr(module, 'bias') and module.bias is not None:
             nn.init.constant_(module.bias, bias)
-

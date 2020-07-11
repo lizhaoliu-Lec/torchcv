@@ -7,7 +7,6 @@ import torch.nn as nn
 import math
 from collections import OrderedDict
 
-
 __all__ = ["DarkNet", 'darknet21', 'darknet53']
 
 model_urls = {
@@ -93,7 +92,6 @@ class DarkNet(nn.Module):
         x = self.layer5(x)
 
         return x
-
 
 
 def darknet21():

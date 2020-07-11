@@ -11,7 +11,6 @@ from tqdm import tqdm
 import scipy.io
 from PIL import Image
 
-
 LABEL_DIR = 'label'
 IMAGE_DIR = 'image'
 
@@ -37,7 +36,7 @@ class PascalAugSegGenerator(object):
 
     def _load_mat(self, filename):
         mat = scipy.io.loadmat(filename, mat_dtype=True, squeeze_me=True,
-            struct_as_record=False)
+                               struct_as_record=False)
         mask = mat['GTcls'].Segmentation
         return Image.fromarray(mask)
 
@@ -93,7 +92,6 @@ class PascalAugSegGenerator(object):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', default=None, type=str,
                         dest='save_dir', help='The directory to save the data.')

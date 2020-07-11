@@ -73,7 +73,8 @@ class SSDPriorBoxLayer(object):
             y_offset = torch.FloatTensor(b).view(-1, 1)
 
             x_y_offset = torch.cat((x_offset, y_offset), 1).contiguous().view(-1, 1, 2)
-            x_y_offset = x_y_offset.repeat(1, self.configer.get('anchor', 'num_anchor_list')[i], 1).contiguous().view(-1, 2)
+            x_y_offset = x_y_offset.repeat(1, self.configer.get('anchor', 'num_anchor_list')[i], 1).contiguous().view(
+                -1, 2)
             anchors[:, :2] = anchors[:, :2] + x_y_offset
             anchor_boxes_list.append(anchors)
 
@@ -83,4 +84,3 @@ class SSDPriorBoxLayer(object):
             anchor_boxes[:, 1::2].clamp_(min=0., max=img_h - 1)
 
         return anchor_boxes
-

@@ -66,13 +66,15 @@ class PafGenerator(object):
 
                 mask = np.logical_or(np.abs(vec_map[0:1, :, :]) > 0, np.abs(vec_map[1:2, :, :]) > 0)
 
-                accumulate_vec_map[2*i:2*i+2, :, :] = np.multiply(accumulate_vec_map[2*i:2*i+2], cnt[i:i+1, :, :])
-                accumulate_vec_map[2*i:2*i+2, :, :] += vec_map
-                cnt[i:i+1, :, :][mask == 1] += 1
-                mask = cnt[i:i+1, :, :] == 0
-                cnt[i:i+1, :, :][mask == 1] = 1
-                accumulate_vec_map[2*i:2*i+2, :, :] = np.divide(accumulate_vec_map[2*i:2*i+2, :, :], cnt[i:i+1, :, :])
-                cnt[i:i+1, :, :][mask == 1] = 0
+                accumulate_vec_map[2 * i:2 * i + 2, :, :] = np.multiply(accumulate_vec_map[2 * i:2 * i + 2],
+                                                                        cnt[i:i + 1, :, :])
+                accumulate_vec_map[2 * i:2 * i + 2, :, :] += vec_map
+                cnt[i:i + 1, :, :][mask == 1] += 1
+                mask = cnt[i:i + 1, :, :] == 0
+                cnt[i:i + 1, :, :][mask == 1] = 1
+                accumulate_vec_map[2 * i:2 * i + 2, :, :] = np.divide(accumulate_vec_map[2 * i:2 * i + 2, :, :],
+                                                                      cnt[i:i + 1, :, :])
+                cnt[i:i + 1, :, :][mask == 1] = 0
 
         vecmap = torch.from_numpy(accumulate_vec_map)
         if maskmap is not None:

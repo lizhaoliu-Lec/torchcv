@@ -11,12 +11,11 @@ import shutil
 
 from pycocotools.coco import COCO
 
-
 JOSN_DIR = 'json'
 IMAGE_DIR = 'image'
 
 CAT_DICT = {
-    "person": 1, "bicycle":2, "car": 3, "motorcycle": 4, "airplane": 5, "bus": 6, "train": 7,
+    "person": 1, "bicycle": 2, "car": 3, "motorcycle": 4, "airplane": 5, "bus": 6, "train": 7,
     "truck": 8, "boat": 9, "traffic light": 10, "fire hydrant": 11, "stop sign": 13, "parking meter": 14,
     "bench": 15, "bird": 16, "cat": 17, "dog": 18, "horse": 19, "sheep": 20, "cow": 21, "elephant": 22,
     "bear": 23, "zebra": 24, "giraffe": 25, "backpack": 27, "umbrella": 28, "handbag": 31, "tie": 32,
@@ -81,7 +80,6 @@ class CocoDetGenerator(object):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', default=None, type=str,
                         dest='save_dir', help='The directory to save the data.')

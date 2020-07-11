@@ -9,7 +9,6 @@ import logging
 import os
 import sys
 
-
 DEFAULT_LOG_LEVEL = 'info'
 DEFAULT_LOG_FORMAT = '%(asctime)s %(levelname)-7s %(message)s'
 
@@ -60,7 +59,7 @@ class Logger(object):
         Logger.check_logger()
         filename = os.path.basename(sys._getframe().f_back.f_code.co_filename)
         lineno = sys._getframe().f_back.f_lineno
-        prefix = '[{}, {}]'.format(filename,lineno)
+        prefix = '[{}, {}]'.format(filename, lineno)
         Logger.logger.debug('{} {}'.format(prefix, message))
 
     @staticmethod
@@ -68,7 +67,7 @@ class Logger(object):
         Logger.check_logger()
         filename = os.path.basename(sys._getframe().f_back.f_code.co_filename)
         lineno = sys._getframe().f_back.f_lineno
-        prefix = '[{}, {}]'.format(filename,lineno)
+        prefix = '[{}, {}]'.format(filename, lineno)
         Logger.logger.info('{} {}'.format(prefix, message))
 
     @staticmethod
@@ -76,7 +75,7 @@ class Logger(object):
         Logger.check_logger()
         filename = os.path.basename(sys._getframe().f_back.f_code.co_filename)
         lineno = sys._getframe().f_back.f_lineno
-        prefix = '[{}, {}]'.format(filename,lineno)
+        prefix = '[{}, {}]'.format(filename, lineno)
         Logger.logger.warn('{} {}'.format(prefix, message))
 
     @staticmethod
@@ -84,7 +83,7 @@ class Logger(object):
         Logger.check_logger()
         filename = os.path.basename(sys._getframe().f_back.f_code.co_filename)
         lineno = sys._getframe().f_back.f_lineno
-        prefix = '[{}, {}]'.format(filename,lineno)
+        prefix = '[{}, {}]'.format(filename, lineno)
         Logger.logger.error('{} {}'.format(prefix, message))
 
     @staticmethod
@@ -92,7 +91,7 @@ class Logger(object):
         Logger.check_logger()
         filename = os.path.basename(sys._getframe().f_back.f_code.co_filename)
         lineno = sys._getframe().f_back.f_lineno
-        prefix = '[{}, {}]'.format(filename,lineno)
+        prefix = '[{}, {}]'.format(filename, lineno)
         Logger.logger.critical('{} {}'.format(prefix, message))
 
 

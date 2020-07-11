@@ -11,7 +11,6 @@ import torch.nn.functional as F
 from lib.model.module_helper import ModuleHelper
 from model.seg.loss.loss import BASE_LOSS_DICT
 
-
 MODEL_CONFIG = {
     'dropout0': 0.1,
     'dropout1': 0.1,
@@ -24,6 +23,7 @@ class DenseASPP(nn.Module):
     """
     * output_scale can only set as 8 or 16
     """
+
     def __init__(self, configer):
         super(DenseASPP, self).__init__()
         self.configer = configer
@@ -128,7 +128,7 @@ class _DenseAsppBlock(nn.Sequential):
         self.add_module('norm1', ModuleHelper.BatchNorm2d(norm_type=norm_type)(num_features=num1)),
         self.add_module('relu1', nn.ReLU(inplace=False)),
         self.add_module('conv2', nn.Conv2d(in_channels=num1, out_channels=num2, kernel_size=3,
-                                            dilation=dilation_rate, padding=dilation_rate)),
+                                           dilation=dilation_rate, padding=dilation_rate)),
         self.add_module('norm2', ModuleHelper.BatchNorm2d(norm_type=norm_type)(num_features=input_num)),
         self.add_module('relu2', nn.ReLU(inplace=False)),
 

@@ -8,9 +8,9 @@ import os
 import argparse
 import shutil
 
-
 IMAGE_DIR = 'image'
 LABEL_DIR = 'label'
+
 
 def str2bool(v):
     """ Usage:
@@ -106,7 +106,6 @@ class CityscapesSegGenerator(object):
                 shutil.copy(os.path.join(ori_val_label_dir, label_file),
                             os.path.join(self.val_label_dir, '{}.png'.format(shotname)))
 
-
     def __list_dir(self, dir_name):
         filename_list = list()
         for item in os.listdir(dir_name):
@@ -120,7 +119,6 @@ class CityscapesSegGenerator(object):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--coarse', type=str2bool, nargs='?', default=False,
                         dest='coarse', help='Whether is the coarse data.')

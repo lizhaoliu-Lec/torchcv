@@ -28,7 +28,7 @@ class CPM(nn.Module):
         self.conv1_stage2 = nn.Conv2d(3, 128, kernel_size=9, padding=4)
         self.pool1_stage2 = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.conv2_stage2 = nn.Conv2d(128, 128, kernel_size=9, padding=4)
-        self.pool2_stage2 = nn.MaxPool2d(kernel_size=3, stride=2,  padding=1)
+        self.pool2_stage2 = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.conv3_stage2 = nn.Conv2d(128, 128, kernel_size=9, padding=4)
         self.pool3_stage2 = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.conv4_stage2 = nn.Conv2d(128, 32, kernel_size=5, padding=2)

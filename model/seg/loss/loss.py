@@ -12,7 +12,6 @@ from model.seg.loss.ohem_ce_loss import OhemCELoss
 from model.seg.loss.focal_ce_loss import FocalCELoss
 from model.seg.loss.encode_loss import EncodeLoss
 
-
 BASE_LOSS_DICT = dict(
     ce_loss=0,
     ohem_ce_loss=1,

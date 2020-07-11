@@ -23,6 +23,7 @@ class SingleShotDetector(object):
     """
       The class for Single Shot Detector. Include train, val, test & predict.
     """
+
     def __init__(self, configer):
         self.configer = configer
         self.batch_time = AverageMeter()

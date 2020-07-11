@@ -24,6 +24,7 @@ class FCNSegmentor(object):
     """
       The class for Pose Estimation. Include train, val, val & predict.
     """
+
     def __init__(self, configer):
         self.configer = configer
         self.batch_time = AverageMeter()
@@ -103,9 +104,9 @@ class FCNSegmentor(object):
                          'Time {batch_time.sum:.3f}s / {2}iters, ({batch_time.avg:.3f})\t'
                          'Data load {data_time.sum:.3f}s / {2}iters, ({data_time.avg:3f})\n'
                          'Learning rate = {4}\tLoss = {3}\n'.format(
-                         self.runner_state['epoch'], self.runner_state['iters'],
-                         self.configer.get('solver', 'display_iter'), self.train_losses.info(),
-                         RunnerHelper.get_lr(self.optimizer), batch_time=self.batch_time, data_time=self.data_time))
+                    self.runner_state['epoch'], self.runner_state['iters'],
+                    self.configer.get('solver', 'display_iter'), self.train_losses.info(),
+                    RunnerHelper.get_lr(self.optimizer), batch_time=self.batch_time, data_time=self.data_time))
                 self.batch_time.reset()
                 self.data_time.reset()
                 self.train_losses.reset()
@@ -141,7 +142,7 @@ class FCNSegmentor(object):
                 loss_dict = self.loss(out)
                 # Compute the loss of the val batch.
                 out_dict, _ = RunnerHelper.gather(self, out)
-            
+
             self.val_losses.update({key: loss.item() for key, loss in loss_dict.items()}, data_dict['img'].size(0))
             self._update_running_score(out_dict['out'], DCHelper.tolist(data_dict['meta']))
 

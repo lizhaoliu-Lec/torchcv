@@ -9,7 +9,6 @@ import os
 import argparse
 import shutil
 
-
 NUM_OF_CLASSES = 1000
 
 
@@ -61,7 +60,6 @@ class ImageNetClsGenerator(object):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', default=None, type=str,
                         dest='save_dir', help='The directory to save the data.')

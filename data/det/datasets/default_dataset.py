@@ -14,6 +14,7 @@ from lib.tools.helper.json_helper import JsonHelper
 from lib.tools.helper.image_helper import ImageHelper
 from lib.tools.util.logger import Logger as Log
 
+
 # torch.multiprocessing.set_sharing_strategy('file_system')
 
 

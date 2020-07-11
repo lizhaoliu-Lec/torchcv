@@ -10,6 +10,7 @@ import torch.nn as nn
 class CGNL(nn.Module):
     """CGNL block with dot production kernel for image classfication.
     """
+
     def __init__(self, inplanes, planes, use_scale=False, groups=8):
         self.use_scale = use_scale
         self.groups = groups
@@ -23,9 +24,8 @@ class CGNL(nn.Module):
         self.g = nn.Conv2d(inplanes, planes, kernel_size=1, stride=1, bias=False)
         # conv z
         self.z = nn.Conv2d(planes, inplanes, kernel_size=1, stride=1,
-                                                  groups=self.groups, bias=False)
+                           groups=self.groups, bias=False)
         self.gn = nn.GroupNorm(num_groups=self.groups, num_channels=inplanes)
-
 
     def kernel(self, t, p, g, b, c, h, w):
         """The linear kernel (dot production).
@@ -45,7 +45,7 @@ class CGNL(nn.Module):
         att = torch.bmm(p, g)
 
         if self.use_scale:
-            att = att.div((c*h*w)**0.5)
+            att = att.div((c * h * w) ** 0.5)
 
         x = torch.bmm(att, t)
         x = x.view(b, c, h, w)

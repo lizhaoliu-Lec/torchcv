@@ -12,7 +12,6 @@ from PIL import Image
 from lib.tools.helper.file_helper import FileHelper
 from lib.tools.util.logger import Logger as Log
 
-
 PIL_INTER_DICT = {
     'nearest': Image.NEAREST,
     'linear': Image.BILINEAR,

@@ -6,8 +6,8 @@
 
 import torch.nn as nn
 
-from model.cls.loss import KLLoss, CELoss, HardTripletLoss, LiftedStructureLoss, SoftCELoss, MixupCELoss, MixupSoftCELoss
-
+from model.cls.loss import KLLoss, CELoss, HardTripletLoss, LiftedStructureLoss, SoftCELoss, MixupCELoss, \
+    MixupSoftCELoss
 
 BASE_LOSS_DICT = dict(
     ce_loss=0,

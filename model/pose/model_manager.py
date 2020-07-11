@@ -9,7 +9,6 @@ from model.pose.nets.open_pose import OpenPose
 from model.pose.loss.loss import Loss
 from lib.tools.util.logger import Logger as Log
 
-
 POSE_MODEL_DICT = {
     'openpose': OpenPose,
     'cpm': CPM

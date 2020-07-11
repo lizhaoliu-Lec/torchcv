@@ -13,7 +13,6 @@ from model.det.layers.ssd_target_generator import SSDTargetGenerator
 from model.det.loss.loss import BASE_LOSS_DICT
 from lib.tools.util.logger import Logger as Log
 
-
 DETECTOR_CONFIG = {
     'num_centrals': [256, 128, 128, 128],
     'num_strides': [2, 2, 1, 1],
@@ -164,7 +163,6 @@ class SSDHead(nn.Module):
                                            num_c=self.num_centrals[3], stride=self.num_strides[3],
                                            pad=self.num_paddings[3])
 
-
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.xavier_normal_(m.weight.data)
@@ -202,8 +200,8 @@ class SSDHead(nn.Module):
 
 
 class L2Norm(nn.Module):
-    def __init__(self,n_channels, scale):
-        super(L2Norm,self).__init__()
+    def __init__(self, n_channels, scale):
+        super(L2Norm, self).__init__()
         self.n_channels = n_channels
         self.gamma = scale or None
         self.eps = 1e-10
@@ -211,10 +209,10 @@ class L2Norm(nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
-        init.constant_(self.weight,self.gamma)
+        init.constant_(self.weight, self.gamma)
 
     def forward(self, x):
-        norm = x.pow(2).sum(dim=1, keepdim=True).sqrt()+self.eps
+        norm = x.pow(2).sum(dim=1, keepdim=True).sqrt() + self.eps
         x = x / norm
         out = self.weight.unsqueeze(0).unsqueeze(2).unsqueeze(3).expand_as(x) * x
         return out

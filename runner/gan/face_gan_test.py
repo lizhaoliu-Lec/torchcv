@@ -39,9 +39,11 @@ class FaceGANTest(object):
     def test(self, test_dir, out_dir):
         if self.configer.exists('test', 'mode') and self.configer.get('test', 'mode') == 'nir2vis':
             jsonA_path = os.path.join(test_dir, 'val_label{}A.json'.format(self.configer.get('data', 'tag')))
-            test_loader_A = self.test_loader.get_testloader(json_path=jsonA_path) if os.path.exists(jsonA_path) else None
+            test_loader_A = self.test_loader.get_testloader(json_path=jsonA_path) if os.path.exists(
+                jsonA_path) else None
             jsonB_path = os.path.join(test_dir, 'val_label{}B.json'.format(self.configer.get('data', 'tag')))
-            test_loader_B = self.test_loader.get_testloader(json_path=jsonB_path) if os.path.exists(jsonB_path) else None
+            test_loader_B = self.test_loader.get_testloader(json_path=jsonB_path) if os.path.exists(
+                jsonB_path) else None
 
         else:
             test_loader_A, test_loader_B = None, None
@@ -128,7 +130,7 @@ class FaceGANTest(object):
             # find the index of image in the gallery that has the same name as probe image
             # print(result)
             # print('++++++++++++++++++++++++++++++++=')
-            index = np.nonzero(result==1)
+            index = np.nonzero(result == 1)
 
             # if i == 10:
             #     exit()
@@ -142,7 +144,7 @@ class FaceGANTest(object):
                 pass
                 # print(probe_img_list[i], gallery_img_list[ind])
 
-        r_acc = count/(len(probe_labels)+1e-5)
+        r_acc = count / (len(probe_labels) + 1e-5)
         fpr, tpr, thresholds = roc_curve(label.flatten(), score.flatten())
         # print("In sub_experiment", label.size(0), 'count of true label :', count)
         # print('rank1 accuracy =', r_acc)

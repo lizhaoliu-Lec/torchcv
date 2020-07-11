@@ -95,4 +95,3 @@ class ConvPoseMachineTest(object):
                            self.configer.get('details', 'color_list')[i], thickness=-1)
 
         return img_canvas
-

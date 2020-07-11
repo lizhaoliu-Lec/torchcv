@@ -106,7 +106,7 @@ if __name__ == '__main__':
     configer.add('project_dir', 'root')
     configer.update('project_dir', 'root1')
 
-    print (configer.get('project_dir'))
-    print (configer.get('network.resume'))
-    print (configer.get('logging', 'log_file'))
+    print(configer.get('project_dir'))
+    print(configer.get('network.resume'))
+    print(configer.get('logging', 'log_file'))
     print(configer.get('data', 'train_dir'))

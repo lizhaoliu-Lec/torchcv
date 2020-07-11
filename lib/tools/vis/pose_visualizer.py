@@ -17,7 +17,6 @@ from scipy.ndimage.filters import gaussian_filter
 from lib.data.transforms import DeNormalize
 from lib.tools.util.logger import Logger as Log
 
-
 POSE_DIR = 'vis/results/pose'
 
 
@@ -112,8 +111,8 @@ class PoseVisualizer(object):
             ori_img = ori_img_in.copy()
 
         for i in range(len(self.configer.get('details', 'limb_seq'))):
-            U = inputs[:, :, 2*i] * -1
-            V = inputs[:, :, 2*i+1]
+            U = inputs[:, :, 2 * i] * -1
+            V = inputs[:, :, 2 * i + 1]
             X, Y = np.meshgrid(np.arange(U.shape[1]), np.arange(U.shape[0]))
             M = np.zeros(U.shape, dtype='bool')
             M[U ** 2 + V ** 2 < 0.5 * 0.5] = True

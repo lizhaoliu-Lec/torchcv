@@ -22,7 +22,8 @@ class DefaultFaceGANDataset(data.Dataset):
         self.configer = configer
         self.aug_transform = aug_transform
         self.img_transform = img_transform
-        self.imgA_list, self.labelA_list, self.imgB_list, self.labelB_list = self.__read_json_file(root_dir, dataset, tag)
+        self.imgA_list, self.labelA_list, self.imgB_list, self.labelB_list = self.__read_json_file(root_dir, dataset,
+                                                                                                   tag)
 
     def __getitem__(self, index):
         imgA = ImageHelper.read_image(self.imgA_list[index],

@@ -24,7 +24,7 @@ class BlobHelper(object):
         img_list, meta_list = [], []
         for image, meta in zip(DCHelper.tolist(data_dict['img']), DCHelper.tolist(data_dict['meta'])):
             c, h, w = image.size()
-            border_hw = [int(h*scale), int(w*scale)]
+            border_hw = [int(h * scale), int(w * scale)]
             meta['border_wh'] = border_hw[::-1]
             image = TensorHelper.resize(image, border_hw, mode='bilinear', align_corners=True)
             if flip:

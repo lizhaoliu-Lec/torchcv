@@ -27,7 +27,7 @@ class FRROISampler(object):
 
         sample_roi_list = list()
         gt_roi_loc_list = list()
-        gt_roi_label_list= list()
+        gt_roi_label_list = list()
         gt_roi_mask_list = list()
 
         for i in range(len(gt_bboxes)):

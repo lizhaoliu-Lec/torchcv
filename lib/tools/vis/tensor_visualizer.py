@@ -11,7 +11,6 @@ import numpy as np
 from lib.datasets.tools.transforms import DeNormalize
 from lib.tools.util.logger import Logger as Log
 
-
 TENSOR_DIR = 'vis/results/tensor'
 
 
